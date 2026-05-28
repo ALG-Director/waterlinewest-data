@@ -1,0 +1,38 @@
+name: Update Snowpack Status
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 13:15 UTC = 6:15 AM Arizona time. Arizona is UTC-7 year-round.
+    - cron: '15 13 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-lees-ferry:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Update Lees Ferry flow in snowpack JSON
+        run: python scripts/update_lees_ferry.py
+
+      - name: Commit updated JSON if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/snowpack-status.json
+          if git diff --cached --quiet; then
+            echo "No JSON changes to commit."
+          else
+            git commit -m "Update Lees Ferry flow"
+            git push
+          fi
