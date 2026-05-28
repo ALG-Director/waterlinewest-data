@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  update-lees-ferry:
+  update-waterlinewest-json:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,17 +22,19 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Update Lees Ferry flow in snowpack JSON
+      - name: Update Lees Ferry and Lake Powell values
         run: python scripts/update_lees_ferry.py
 
       - name: Commit updated JSON if it changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add docs/snowpack-status.json
+
           if git diff --cached --quiet; then
             echo "No JSON changes to commit."
           else
-            git commit -m "Update Lees Ferry flow"
+            git commit -m "Update Lees Ferry and Lake Powell data"
             git push
           fi
