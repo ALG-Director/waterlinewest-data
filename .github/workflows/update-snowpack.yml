@@ -25,6 +25,9 @@ jobs:
       - name: Update Lees Ferry and Lake Powell values
         run: python scripts/update_lees_ferry.py
 
+      - name: Update Lake Powell elevation
+        run: python scripts/update_lake_powell.py
+
       - name: Commit updated JSON if it changed
         run: |
           git config user.name "github-actions[bot]"
