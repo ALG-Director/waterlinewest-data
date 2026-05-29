@@ -3,8 +3,8 @@
   "module_title": "Colorado River Snowpack",
   "status_label": "Current official data",
   "water_year": 2026,
-  "site_last_checked": "2026-05-29T15:31:37-07:00",
-  "site_last_checked_display": "May 29, 2026, 3:31 PM Arizona time",
+  "site_last_checked": "2026-05-29T16:23:07-07:00",
+  "site_last_checked_display": "May 29, 2026, 4:23 PM Arizona time",
   "editorial_note": "Phase 1 manual data file. Values should be checked against official source pages before publication.",
   "indicators": {
     "upper_basin_snow": {
@@ -39,9 +39,9 @@
     },
     "lees_ferry_flow": {
       "label": "Lees Ferry Flow",
-      "display_value": "8,110",
+      "display_value": "8,140",
       "note": "cfs",
-      "timestamp": "Observed May 28, 2026, 2:00 PM Arizona time",
+      "timestamp": "Observed May 29, 2026, 4:00 PM Arizona time",
       "source_name": "USGS Water Data",
       "source_url": "https://waterdata.usgs.gov/monitoring-location/09380000/",
       "update_cadence": "Near real time where available",
@@ -49,7 +49,7 @@
       "api_url": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=09380000&parameterCd=00060&siteStatus=all",
       "usgs_site_no": "09380000",
       "usgs_parameter_cd": "00060",
-      "usgs_observed_datetime": "2026-05-28T14:00:00-07:00"
+      "usgs_observed_datetime": "2026-05-29T16:00:00-07:00"
     },
     "powell_elevation": {
       "label": "Lake Powell Elevation",
@@ -72,9 +72,9 @@
     "updated_indicator": "lees_ferry_flow",
     "script": "scripts/update_lees_ferry.py",
     "source": "USGS Instantaneous Values service",
-    "last_run_display": "May 28, 2026, 2:45 PM Arizona time",
+    "last_run_display": "May 29, 2026, 4:23 PM Arizona time",
     "script_powell": "scripts/update_lake_powell.py",
     "powell_source": "USBR Upper Colorado HydroData (reservoir 919, datatype 49)",
-    "powell_last_run_display": "May 29, 2026, 3:31 PM Arizona time"
+    "powell_last_run_display": "May 29, 2026, 4:23 PM Arizona time"
   }
 }
