@@ -7,22 +7,25 @@ Source:
   Reservoir: 919 — Lake Powell (Glen Canyon Dam)
   Datatype: 49 — Pool Elevation, feet above mean sea level
 
-This mirrors scripts/update_lees_ferry.py. It updates only the
-`powell_elevation` indicator and leaves every other value untouched, so the
-manually curated indicators stay exactly as the editor left them.
+Hardened behavior:
+  * Retries the Reclamation feed a few times before giving up.
+  * If Reclamation is unreachable after the retries, this script SOFT-FAILS:
+    it prints a warning, leaves the existing Powell value untouched, and exits
+    0 (success). That way a slow Reclamation server never stops the workflow,
+    so the Lees Ferry update and the commit step still run normally.
 """
 
 from __future__ import annotations
 
 import json
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
-# Lake Powell daily pool elevation (period of record), Reclamation Upper Colorado.
 USBR_ELEVATION_URL = (
     "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/919/json/49.json"
 )
@@ -31,7 +34,6 @@ AZ = ZoneInfo("America/Phoenix")
 
 
 def pretty_datetime(dt: datetime) -> str:
-    """Return a readable Arizona-time timestamp without leading-zero day/hour."""
     dt_az = dt.astimezone(AZ)
     month = dt_az.strftime("%B")
     day = dt_az.day
@@ -43,30 +45,30 @@ def pretty_datetime(dt: datetime) -> str:
 
 
 def pretty_date(d: datetime) -> str:
-    """Return a readable date like 'May 27, 2026' (no leading-zero day)."""
     return f"{d.strftime('%B')} {d.day}, {d.year}"
 
 
-def load_json_from_url(url: str) -> dict:
-    # A User-Agent header avoids occasional 403s from the Reclamation host.
+def load_json_from_url(url: str, attempts: int = 4, timeout: int = 60) -> dict:
+    """Fetch JSON with retries. Raises only after all attempts fail."""
     request = Request(url, headers={"User-Agent": "WaterLineWest-Data/1.0"})
-    try:
-        with urlopen(request, timeout=60) as response:
-            return json.loads(response.read().decode("utf-8"))
-    except HTTPError as exc:
-        raise RuntimeError(f"USBR request failed with HTTP {exc.code}: {exc.reason}") from exc
-    except URLError as exc:
-        raise RuntimeError(f"USBR request failed: {exc.reason}") from exc
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        try:
+            with urlopen(request, timeout=timeout) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except HTTPError as exc:
+            last_error = RuntimeError(
+                f"USBR request failed with HTTP {exc.code}: {exc.reason}"
+            )
+        except (URLError, TimeoutError) as exc:
+            reason = getattr(exc, "reason", exc)
+            last_error = RuntimeError(f"USBR request failed: {reason}")
+        if attempt < attempts:
+            time.sleep(5 * attempt)  # 5s, 10s, 15s between tries
+    raise last_error
 
 
-def extract_latest_elevation(payload: dict) -> tuple[float, datetime]:
-    """Extract the most recent non-null pool elevation and its date.
-
-    The feed looks like:
-        {"columns": ["datetime", "pool elevation"],
-         "data": [["1963-12-28", 3409.0], ..., ["2026-05-27", 3526.24]]}
-    Rows are in chronological order, so we walk backward to the last real value.
-    """
+def extract_latest_elevation(payload: dict):
     rows = payload.get("data", [])
     if not rows:
         raise RuntimeError("USBR response did not include any data rows.")
@@ -92,8 +94,19 @@ def main() -> int:
         raise RuntimeError(f"Missing status file: {STATUS_PATH}")
 
     status = json.loads(STATUS_PATH.read_text(encoding="utf-8"))
-    payload = load_json_from_url(USBR_ELEVATION_URL)
-    elevation_ft, observed_date = extract_latest_elevation(payload)
+
+    # Soft-fail boundary: if Reclamation can't be reached after retries, warn
+    # and exit successfully so the rest of the workflow (commit) still runs.
+    try:
+        payload = load_json_from_url(USBR_ELEVATION_URL)
+        elevation_ft, observed_date = extract_latest_elevation(payload)
+    except Exception as exc:
+        print(
+            f"WARNING: Lake Powell update skipped this run ({exc}). "
+            "Keeping the previous value.",
+            file=sys.stderr,
+        )
+        return 0
 
     now_az = datetime.now(tz=AZ)
     display_value = f"{elevation_ft:,.2f}"
