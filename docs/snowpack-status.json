@@ -3,8 +3,8 @@
   "module_title": "Colorado River Snowpack",
   "status_label": "Current official data",
   "water_year": 2026,
-  "site_last_checked": "2026-05-28T20:48:53-07:00",
-  "site_last_checked_display": "May 28, 2026, 8:48 PM Arizona time",
+  "site_last_checked": "2026-05-29T15:31:37-07:00",
+  "site_last_checked_display": "May 29, 2026, 3:31 PM Arizona time",
   "editorial_note": "Phase 1 manual data file. Values should be checked against official source pages before publication.",
   "indicators": {
     "upper_basin_snow": {
@@ -53,9 +53,9 @@
     },
     "powell_elevation": {
       "label": "Lake Powell Elevation",
-      "display_value": "3,527.94",
+      "display_value": "3,527.90",
       "note": "ft above sea level",
-      "timestamp": "Observed May 27, 2026",
+      "timestamp": "Observed May 28, 2026",
       "source_name": "U.S. Bureau of Reclamation",
       "source_url": "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/919/dashboard.html",
       "api_url": "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/919/json/49.json",
@@ -63,7 +63,7 @@
       "provisional": true,
       "usbr_site_id": "919",
       "usbr_datatype_id": "49",
-      "usbr_observed_date": "2026-05-27"
+      "usbr_observed_date": "2026-05-28"
     }
   },
   "source_line": "Sources: NRCS/CAP snowpack reporting · NOAA CBRFC · U.S. Bureau of Reclamation · USGS Water Data. Lees Ferry flow updates automatically from USGS; other values remain curated in Phase 2A. Provisional values may be revised.",
@@ -75,6 +75,6 @@
     "last_run_display": "May 28, 2026, 2:45 PM Arizona time",
     "script_powell": "scripts/update_lake_powell.py",
     "powell_source": "USBR Upper Colorado HydroData (reservoir 919, datatype 49)",
-    "powell_last_run_display": "May 28, 2026, 8:48 PM Arizona time"
+    "powell_last_run_display": "May 29, 2026, 3:31 PM Arizona time"
   }
 }
