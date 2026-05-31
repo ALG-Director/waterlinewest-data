@@ -3,8 +3,8 @@
   "module_title": "Colorado River Snowpack",
   "status_label": "Current official data",
   "water_year": 2026,
-  "site_last_checked": "2026-05-30T14:16:07-07:00",
-  "site_last_checked_display": "May 30, 2026, 2:16 PM Arizona time",
+  "site_last_checked": "2026-05-31T09:47:35-07:00",
+  "site_last_checked_display": "May 31, 2026, 9:47 AM Arizona time",
   "editorial_note": "Phase 1 manual data file. Values should be checked against official source pages before publication.",
   "indicators": {
     "upper_basin_snow": {
@@ -39,9 +39,9 @@
     },
     "lees_ferry_flow": {
       "label": "Lees Ferry Flow",
-      "display_value": "7,940",
+      "display_value": "6,150",
       "note": "cfs",
-      "timestamp": "Observed May 30, 2026, 2:00 PM Arizona time",
+      "timestamp": "Observed May 31, 2026, 9:00 AM Arizona time",
       "source_name": "USGS Water Data",
       "source_url": "https://waterdata.usgs.gov/monitoring-location/09380000/",
       "update_cadence": "Near real time where available",
@@ -49,22 +49,22 @@
       "api_url": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=09380000&parameterCd=00060&siteStatus=all",
       "usgs_site_no": "09380000",
       "usgs_parameter_cd": "00060",
-      "usgs_observed_datetime": "2026-05-30T14:00:00-07:00",
-      "trend": "steady",
+      "usgs_observed_datetime": "2026-05-31T09:00:00-07:00",
+      "trend": "falling",
       "trend_band_pct": 8.0,
-      "avg_7day": 7446,
-      "avg_7day_display": "7,446",
-      "pct_vs_avg": 6.6,
-      "trend_note": "6.6% near 7-day avg",
+      "avg_7day": 7444,
+      "avg_7day_display": "7,444",
+      "pct_vs_avg": -17.4,
+      "trend_note": "17.4% below 7-day avg",
       "trend_window_days": 7,
-      "trend_window_start": "2026-05-23",
-      "trend_window_end": "2026-05-29"
+      "trend_window_start": "2026-05-24",
+      "trend_window_end": "2026-05-30"
     },
     "powell_elevation": {
       "label": "Lake Powell Elevation",
-      "display_value": "3,527.86",
+      "display_value": "3,527.92",
       "note": "ft above sea level",
-      "timestamp": "Observed May 29, 2026",
+      "timestamp": "Observed May 30, 2026",
       "source_name": "U.S. Bureau of Reclamation",
       "source_url": "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/919/dashboard.html",
       "api_url": "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/919/json/49.json",
@@ -72,16 +72,16 @@
       "provisional": true,
       "usbr_site_id": "919",
       "usbr_datatype_id": "49",
-      "usbr_observed_date": "2026-05-29",
+      "usbr_observed_date": "2026-05-30",
       "trend": "steady",
       "trend_band_ft": 0.5,
-      "avg_7day": 3527.84,
-      "avg_7day_display": "3,527.84",
-      "ft_vs_avg": 0.02,
-      "trend_note": "0.02 ft near 7-day avg",
+      "avg_7day": 3527.87,
+      "avg_7day_display": "3,527.87",
+      "ft_vs_avg": 0.05,
+      "trend_note": "0.05 ft near 7-day avg",
       "trend_window_days": 7,
-      "trend_window_start": "2026-05-23",
-      "trend_window_end": "2026-05-29"
+      "trend_window_start": "2026-05-24",
+      "trend_window_end": "2026-05-30"
     }
   },
   "source_line": "Sources: NRCS/CAP snowpack reporting · NOAA CBRFC · U.S. Bureau of Reclamation · USGS Water Data. Lees Ferry flow updates automatically from USGS; other values remain curated. Provisional values may be revised.",
@@ -90,9 +90,9 @@
     "updated_indicator": "lees_ferry_flow",
     "script": "scripts/update_lees_ferry.py",
     "source": "USGS Instantaneous Values service",
-    "last_run_display": "May 30, 2026, 2:16 PM Arizona time",
+    "last_run_display": "May 31, 2026, 9:47 AM Arizona time",
     "script_powell": "scripts/update_lake_powell.py",
     "powell_source": "USBR Upper Colorado HydroData (reservoir 919, datatype 49)",
-    "powell_last_run_display": "May 30, 2026, 2:16 PM Arizona time"
+    "powell_last_run_display": "May 31, 2026, 9:47 AM Arizona time"
   }
 }
