@@ -210,7 +210,7 @@ def main() -> int:
     status["source_line"] = (
         "Sources: NRCS/CAP snowpack reporting · NOAA CBRFC · "
         "U.S. Bureau of Reclamation · USGS Water Data. "
-        "Lees Ferry flow updates automatically from USGS; other values remain curated. "
+        "Lees Ferry flow, tributary inflow, and Lake Powell elevation update automatically from USGS and Reclamation; snowpack and forecast values remain curated. "
         "Provisional values may be revised."
     )
 
