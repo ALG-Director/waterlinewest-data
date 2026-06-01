@@ -3,8 +3,8 @@
   "module_title": "Colorado River Snowpack",
   "status_label": "Current official data",
   "water_year": 2026,
-  "site_last_checked": "2026-06-01T13:43:44-07:00",
-  "site_last_checked_display": "June 1, 2026, 1:43 PM Arizona time",
+  "site_last_checked": "2026-06-01T16:28:15-07:00",
+  "site_last_checked_display": "June 1, 2026, 4:28 PM Arizona time",
   "editorial_note": "Phase 1 manual data file. Values should be checked against official source pages before publication.",
   "indicators": {
     "upper_basin_snow": {
@@ -41,7 +41,7 @@
       "label": "Lees Ferry Flow",
       "display_value": "8,140",
       "note": "cfs",
-      "timestamp": "Observed June 1, 2026, 1:00 PM Arizona time",
+      "timestamp": "Observed June 1, 2026, 4:00 PM Arizona time",
       "source_name": "USGS Water Data",
       "source_url": "https://waterdata.usgs.gov/monitoring-location/09380000/",
       "update_cadence": "Near real time where available",
@@ -49,7 +49,7 @@
       "api_url": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=09380000&parameterCd=00060&siteStatus=all",
       "usgs_site_no": "09380000",
       "usgs_parameter_cd": "00060",
-      "usgs_observed_datetime": "2026-06-01T13:00:00-07:00",
+      "usgs_observed_datetime": "2026-06-01T16:00:00-07:00",
       "trend": "rising",
       "trend_band_pct": 8.0,
       "avg_7day": 7444,
@@ -85,9 +85,9 @@
     },
     "tributary_inflow": {
       "label": "Tributary Inflow",
-      "display_value": "8,790",
+      "display_value": "8,620",
       "note": "cfs",
-      "timestamp": "Observed June 1, 2026, 1:00 PM Arizona time",
+      "timestamp": "Observed June 1, 2026, 4:00 PM Arizona time",
       "source_name": "USGS Water Data",
       "source_url": "https://waterdata.usgs.gov/monitoring-location/09180500/",
       "api_url": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=09180500,09315000,09379500&parameterCd=00060&siteStatus=all",
@@ -106,17 +106,17 @@
       },
       "usgs_parameter_cd": "00060",
       "components_cfs": {
-        "09180500": 3870,
-        "09315000": 3620,
-        "09379500": 1300
+        "09180500": 3630,
+        "09315000": 3640,
+        "09379500": 1350
       },
-      "usgs_observed_datetime": "2026-06-01T14:00:00-06:00",
+      "usgs_observed_datetime": "2026-06-01T17:00:00-06:00",
       "trend": "steady",
       "trend_band_pct": 8.0,
       "avg_7day": 8267,
       "avg_7day_display": "8,267",
-      "pct_vs_avg": 6.3,
-      "trend_note": "6.3% near 7-day avg",
+      "pct_vs_avg": 4.3,
+      "trend_note": "4.3% near 7-day avg",
       "trend_window_days": 7,
       "trend_window_start": "2026-05-25",
       "trend_window_end": "2026-05-31"
@@ -128,12 +128,12 @@
     "updated_indicator": "lees_ferry_flow",
     "script": "scripts/update_lees_ferry.py",
     "source": "USGS Instantaneous Values service",
-    "last_run_display": "June 1, 2026, 1:43 PM Arizona time",
+    "last_run_display": "June 1, 2026, 4:28 PM Arizona time",
     "script_powell": "scripts/update_lake_powell.py",
     "powell_source": "USBR Upper Colorado HydroData (reservoir 919, datatype 49)",
-    "powell_last_run_display": "June 1, 2026, 1:43 PM Arizona time",
+    "powell_last_run_display": "June 1, 2026, 4:28 PM Arizona time",
     "script_tributary": "scripts/update_tributary_inflow.py",
     "tributary_source": "USGS Instantaneous Values service (composite of 09180500, 09315000, 09379500)",
-    "tributary_last_run_display": "June 1, 2026, 1:43 PM Arizona time"
+    "tributary_last_run_display": "June 1, 2026, 4:28 PM Arizona time"
   }
 }
