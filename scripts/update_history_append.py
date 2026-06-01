@@ -31,6 +31,9 @@ TRACKED = {
     "tributary_inflow": 0,
     "lees_ferry_flow": 0,
     "powell_elevation": 2,
+    "grand_canyon_inflow": 0,
+    "mead_elevation": 2,
+    "hoover_release": 0,
 }
 
 
