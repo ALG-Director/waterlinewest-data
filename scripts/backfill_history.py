@@ -50,7 +50,16 @@ TRIB_STATIONS = {
     "09379500": "San Juan River near Bluff",
 }
 LEES_SITE = "09380000"
+GRAND_CANYON_SITE = "09402500"  # Colorado River near Grand Canyon, AZ (inflow to Mead reach)
 USBR_POWELL_URL = "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/919/json/49.json"
+# Lake Mead = Reclamation reservoir 921. Datatype 49 = pool elevation.
+USBR_MEAD_ELEV_URL = "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/921/json/49.json"
+# Hoover total release (cfs). Datatype id for "Total Release" — verified on first
+# live run; if this id is wrong the indicator soft-fails without breaking others.
+USBR_HOOVER_RELEASE_DATATYPE = 42
+USBR_HOOVER_RELEASE_URL = (
+    f"https://www.usbr.gov/uc/water/hydrodata/reservoir_data/921/json/{USBR_HOOVER_RELEASE_DATATYPE}.json"
+)
 
 TODAY = date.today().isoformat()
 
@@ -122,17 +131,38 @@ def fetch_lees_series() -> dict:
     return usgs_daily_map(payload, LEES_SITE)
 
 
-def fetch_powell_series() -> dict:
-    payload = load_json_from_url(USBR_POWELL_URL)
+def fetch_grand_canyon_series() -> dict:
+    payload = load_json_from_url(usgs_dv_url(GRAND_CANYON_SITE))
+    return usgs_daily_map(payload, GRAND_CANYON_SITE)
+
+
+def _fetch_usbr_series(url: str) -> dict:
+    """Generic USBR HydroData reader: rows of [date, value] -> {date_str: value}."""
+    payload = load_json_from_url(url)
     out = {}
     for row in payload.get("data", []):
         if not row or len(row) < 2 or row[0] is None or row[1] is None:
             continue
         try:
-            out[str(row[0])[:10]] = float(row[1])
+            v = float(row[1])
         except (ValueError, TypeError):
             continue
+        if v < 0:
+            continue
+        out[str(row[0])[:10]] = v
     return out
+
+
+def fetch_powell_series() -> dict:
+    return _fetch_usbr_series(USBR_POWELL_URL)
+
+
+def fetch_mead_series() -> dict:
+    return _fetch_usbr_series(USBR_MEAD_ELEV_URL)
+
+
+def fetch_hoover_release_series() -> dict:
+    return _fetch_usbr_series(USBR_HOOVER_RELEASE_URL)
 
 
 def day_of_year_key(d: date) -> int:
@@ -200,6 +230,12 @@ def main() -> int:
          "USGS 09380000 Colorado River at Lees Ferry"),
         ("powell_elevation", fetch_powell_series, "ft", 2,
          "USBR reservoir 919 datatype 49 Lake Powell pool elevation"),
+        ("grand_canyon_inflow", fetch_grand_canyon_series, "cfs", 0,
+         "USGS 09402500 Colorado River near Grand Canyon"),
+        ("mead_elevation", fetch_mead_series, "ft", 2,
+         "USBR reservoir 921 datatype 49 Lake Mead pool elevation"),
+        ("hoover_release", fetch_hoover_release_series, "cfs", 0,
+         "USBR reservoir 921 Hoover Dam total release"),
     ]
 
     for key, fetch, units, rnd, source in builders:
