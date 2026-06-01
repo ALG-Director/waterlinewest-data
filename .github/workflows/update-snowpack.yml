@@ -24,14 +24,14 @@ jobs:
         run: python scripts/update_tributary_inflow.py
       - name: Append daily history
         run: python scripts/update_history_append.py
-      - name: Commit updated JSON if it changed
+      - nam- name: Commit updated JSON if it changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/snowpack-status.json/history-stats.json
+          git add docs/snowpack-status.json docs/history-stats.json
           if git diff --cached --quiet; then
             echo "No JSON changes to commit."
           else
-            git commit -m "Update Lees Ferry, Lake Powell, and tributary inflow data"
+            git commit -m "Update Lees Ferry, Lake Powell, tributary, and history data"
             git push
           fi
