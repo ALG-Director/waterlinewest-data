@@ -20,6 +20,8 @@ jobs:
         run: python scripts/update_lees_ferry.py
       - name: Update Lake Powell elevation
         run: python scripts/update_lake_powell.py
+      - name: Update Dam Release (Glen Canyon power release)
+        run: python scripts/update_dam_release.py
       - name: Update Tributary inflow
         run: python scripts/update_tributary_inflow.py
       - name: Append daily history
