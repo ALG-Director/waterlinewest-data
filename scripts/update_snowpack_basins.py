@@ -47,7 +47,10 @@ AWDB = "https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1"
 DUMP = "https://nwcc-apps.sc.egov.usda.gov/awdb/data/WTEQ/DAILY/OBS/WTEQ_DAILY_OBS_{md}.json"
 
 NORMALS_START, NORMALS_END = 1991, 2020
-MIN_NORMAL_YEARS = 20          # station must have >= this many window-years to count
+MIN_NORMAL_YEARS = 10          # min years in the 1991-2020 window for a usable normal.
+                               # The robust index is insensitive to near-zero sites, so
+                               # this is mainly to keep per-station percentages honest
+                               # without cutting legitimate newer high-elevation stations.
 DUMP_LOOKBACK = 4              # days to walk back for a live current-year file
 
 # Some USDA hosts sit behind a WAF that 403s requests without a browser-like
