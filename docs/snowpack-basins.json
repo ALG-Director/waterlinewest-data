@@ -2,7 +2,7 @@
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
   "as_of": "2026-06-03",
-  "generated_at_display": "June 4, 2026, 3:28 PM Arizona time",
+  "generated_at_display": "June 4, 2026, 3:44 PM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",

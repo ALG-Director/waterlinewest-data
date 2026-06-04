@@ -3,8 +3,8 @@
   "module_title": "Colorado River Snowpack",
   "status_label": "Current official data",
   "water_year": 2026,
-  "site_last_checked": "2026-06-04T15:33:05-07:00",
-  "site_last_checked_display": "June 4, 2026, 3:33 PM Arizona time",
+  "site_last_checked": "2026-06-04T15:44:10-07:00",
+  "site_last_checked_display": "June 4, 2026, 3:44 PM Arizona time",
   "editorial_note": "Phase 1 manual data file. Values should be checked against official source pages before publication.",
   "indicators": {
     "upper_basin_snow": {
@@ -39,9 +39,9 @@
     },
     "lees_ferry_flow": {
       "label": "Lees Ferry Flow",
-      "display_value": "8,110",
+      "display_value": "8,070",
       "note": "cfs",
-      "timestamp": "Observed June 4, 2026, 1:00 PM Arizona time",
+      "timestamp": "Observed June 4, 2026, 2:00 PM Arizona time",
       "source_name": "USGS Water Data",
       "source_url": "https://waterdata.usgs.gov/monitoring-location/09380000/",
       "update_cadence": "Near real time where available",
@@ -49,13 +49,13 @@
       "api_url": "https://waterservices.usgs.gov/nwis/iv/?format=json&sites=09380000&parameterCd=00060&siteStatus=all",
       "usgs_site_no": "09380000",
       "usgs_parameter_cd": "00060",
-      "usgs_observed_datetime": "2026-06-04T13:00:00-07:00",
+      "usgs_observed_datetime": "2026-06-04T14:00:00-07:00",
       "trend": "steady",
       "trend_band_pct": 8.0,
       "avg_7day": 7859,
       "avg_7day_display": "7,859",
-      "pct_vs_avg": 3.2,
-      "trend_note": "3.2% near 7-day avg",
+      "pct_vs_avg": 2.7,
+      "trend_note": "2.7% near 7-day avg",
       "trend_window_days": 7,
       "trend_window_start": "2026-05-28",
       "trend_window_end": "2026-06-03"
@@ -85,7 +85,7 @@
     },
     "tributary_inflow": {
       "label": "Tributary Inflow",
-      "display_value": "8,440",
+      "display_value": "8,460",
       "note": "cfs",
       "timestamp": "Observed June 4, 2026, 2:00 PM Arizona time",
       "source_name": "USGS Water Data",
@@ -108,27 +108,27 @@
       "components_cfs": {
         "09180500": 3170,
         "09315000": 4180,
-        "09379500": 1090
+        "09379500": 1110
       },
       "usgs_observed_datetime": "2026-06-04T15:00:00-06:00",
       "trend": "steady",
       "trend_band_pct": 8.0,
       "avg_7day": 8526,
       "avg_7day_display": "8,526",
-      "pct_vs_avg": -1.0,
-      "trend_note": "1.0% near 7-day avg",
+      "pct_vs_avg": -0.8,
+      "trend_note": "0.8% near 7-day avg",
       "trend_window_days": 7,
       "trend_window_start": "2026-05-28",
       "trend_window_end": "2026-06-03"
     },
     "powerplant_release": {
       "label": "Dam Release",
-      "display_value": "8,535",
+      "display_value": "8,542",
       "note": "cfs",
-      "timestamp": "Observed June 2, 2026",
+      "timestamp": "Observed June 3, 2026",
       "provisional": true,
       "trend": "rising",
-      "trend_note": "Up about 902 cfs vs a week ago"
+      "trend_note": "Up about 926 cfs vs a week ago"
     },
     "grand_canyon_inflow": {
       "label": "Grand Canyon Flow",
@@ -155,11 +155,11 @@
     },
     "grand_canyon_pct_median": {
       "label": "Flow vs Median",
-      "display_value": "75%",
+      "display_value": "86%",
       "note": "of median for this date",
       "timestamp": "Observed June 4, 2026, 2:15 PM Arizona time",
-      "median_cfs": 12650,
-      "median_display": "12,650",
+      "median_cfs": 11085,
+      "median_display": "11,085",
       "current_cfs": 9520,
       "day_of_year": 155,
       "provisional": true
@@ -186,6 +186,29 @@
       "ft_vs_avg": -0.95,
       "trend": "falling",
       "trend_note": "0.95 ft below 7-day avg"
+    },
+    "hoover_release": {
+      "label": "Hoover Dam Release",
+      "display_value": "11,519",
+      "note": "cfs",
+      "timestamp": "Observed 2026-06-04",
+      "source_name": "U.S. Bureau of Reclamation",
+      "source_url": "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/921/dashboard.html",
+      "api_url": "https://www.usbr.gov/uc/water/hydrodata/reservoir_data/921/json/42.json",
+      "update_cadence": "Daily",
+      "provisional": true,
+      "usbr_site_id": "921",
+      "usbr_datatype_id": "42",
+      "usbr_observed_date": "2026-06-04",
+      "trend_band_pct": 8.0,
+      "avg_7day": 15661.0,
+      "avg_7day_display": "15,661",
+      "trend_window_days": 7,
+      "trend_window_start": "2026-05-28",
+      "trend_window_end": "2026-06-03",
+      "pct_vs_avg": -26.4,
+      "trend": "falling",
+      "trend_note": "26.4% below 7-day avg"
     }
   },
   "source_line": "Sources: NRCS/CAP snowpack reporting · NOAA CBRFC · U.S. Bureau of Reclamation · USGS Water Data. Lees Ferry flow, tributary inflow, and Lake Powell elevation update automatically from USGS and Reclamation; snowpack and forecast values remain curated. Provisional values may be revised.",
@@ -194,15 +217,15 @@
     "updated_indicator": "grand_canyon_inflow",
     "script": "scripts/update_grand_canyon.py",
     "source": "USGS Instantaneous Values service",
-    "last_run_display": "June 4, 2026, 3:32 PM Arizona time",
+    "last_run_display": "June 4, 2026, 3:44 PM Arizona time",
     "script_powell": "scripts/update_lake_powell.py",
     "powell_source": "USBR Upper Colorado HydroData (reservoir 919, datatype 49)",
-    "powell_last_run_display": "June 4, 2026, 3:28 PM Arizona time",
+    "powell_last_run_display": "June 4, 2026, 3:44 PM Arizona time",
     "script_tributary": "scripts/update_tributary_inflow.py",
     "tributary_source": "USGS Instantaneous Values service (composite of 09180500, 09315000, 09379500)",
-    "tributary_last_run_display": "June 4, 2026, 3:33 PM Arizona time",
+    "tributary_last_run_display": "June 4, 2026, 3:44 PM Arizona time",
     "script_mead": "scripts/update_lake_mead.py",
     "mead_source": "USBR Upper Colorado HydroData (reservoir 921, datatypes 49 & 42)",
-    "mead_last_run_display": "June 4, 2026, 3:33 PM Arizona time"
+    "mead_last_run_display": "June 4, 2026, 3:44 PM Arizona time"
   }
 }
