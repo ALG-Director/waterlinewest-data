@@ -1,30 +1,25 @@
 #!/usr/bin/env python3
 """
-DAILY UPDATER: write docs/snowpack-basins.json for the Upper Colorado basins.
+DAILY UPDATER (REST edition): write docs/snowpack-basins.json for the Upper
+Colorado basins, sourced entirely from the AWDB REST API.
 
-Built on the proven probe. Same pipeline:
-  1. AWDB REST /stations -> every HUC-14 SNOTEL station (triplet, name, elev, huc).
-  2. Freshest WTEQ by-date snapshot that already carries a current-year value
-     (the archive lags 1-2 days, so today's file is often still a year behind).
-  3. Per station: current SWE + its 1991-2020 median, percent of median.
-  4. Roll up to a basin index the robust (NRCS-style) way: sum(current) /
-     sum(median) across reporting stations.
+Why this rewrite: the static WTEQ dump host (nwcc-apps.sc.egov.usda.gov) firewalls
+GitHub Actions IPs intermittently (403). The REST host (wcc.sc.egov.usda.gov) —
+the one our /stations call already reaches reliably — also serves the daily values
+through its /data endpoint, so we get everything from the host that answers.
 
-What this adds over the probe:
-  * CURATION — a station only counts toward a basin if it has at least
-    MIN_NORMAL_YEARS of data inside the 1991-2020 window (i.e. a real normal).
-    This is what pulls the basin-wide total in line with NRCS by dropping
-    short-record / already-melted sites that otherwise pad the denominator.
-  * A per-basin historical DISTRIBUTION in percent space (the spread of the
-    basin index across the window years), so the deep-dive page can show this
-    year against the 30-year range. The median of that spread sits near 100%.
-  * A COMPILED entire-Upper-Colorado index (the number the hero pill will read).
-  * Graceful handling of melted-out basins (no measurable normal -> null, not nan).
+Pipeline (same math as before, new data source):
+  1. /stations  -> every HUC-14 SNOTEL station (triplet, name, elev, huc).
+  2. /data (recent window) -> each station's latest current SWE + its date.
+  3. /data (1991-2020 window) -> each station's full history; we keep the value on
+     the SAME calendar date as the current reading, across years, and take the
+     MEDIAN ourselves (the transparent self-computed normal).
+  4. Curate to stations with >= MIN_NORMAL_YEARS in window, roll up to the robust
+     basin index = sum(current)/sum(median), with per-basin distribution + a
+     compiled Upper Colorado total. Melted/zero-median basins are labeled honestly.
 
-Writes docs/snowpack-basins.json. Does NOT touch snowpack-status.json — re-pointing
-the hero pill is a separate, deliberate step.
-
-Soft-fail: logs and exits 0 on trouble so a scheduled run never hard-breaks.
+Self-computed median, reliable host, no static dump. Soft-fails to exit 0 so a bad
+snowpack day never breaks the workflow (it is also continue-on-error in the YAML).
 """
 
 from __future__ import annotations
@@ -44,17 +39,13 @@ OUT_PATH = Path("docs/snowpack-basins.json")
 ARIZONA = ZoneInfo("America/Phoenix")
 
 AWDB = "https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1"
-DUMP = "https://nwcc-apps.sc.egov.usda.gov/awdb/data/WTEQ/DAILY/OBS/WTEQ_DAILY_OBS_{md}.json"
 
 NORMALS_START, NORMALS_END = 1991, 2020
-MIN_NORMAL_YEARS = 10          # min years in the 1991-2020 window for a usable normal.
-                               # The robust index is insensitive to near-zero sites, so
-                               # this is mainly to keep per-station percentages honest
-                               # without cutting legitimate newer high-elevation stations.
-DUMP_LOOKBACK = 4              # days to walk back for a live current-year file
+MIN_NORMAL_YEARS = 10
+CURRENT_LOOKBACK_DAYS = 12     # recent window to find each station's latest value
+HIST_BATCH = 8                 # stations per /data call for the 30-yr history pull
+CUR_BATCH = 60                 # stations per /data call for the recent-value pull
 
-# Some USDA hosts sit behind a WAF that 403s requests without a browser-like
-# header set. Present as an ordinary browser and retry soft blocks.
 USER_AGENT = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
 
@@ -75,29 +66,23 @@ def fetch_json(url: str, attempts: int = 4) -> object:
         "User-Agent": USER_AGENT,
         "Accept": "application/json, text/plain, */*",
         "Accept-Language": "en-US,en;q=0.9",
-        "Referer": "https://www.nrcs.usda.gov/",
     }
     delay = 1.5
     last = None
     for i in range(attempts):
         try:
             req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=60) as resp:
+            with urllib.request.urlopen(req, timeout=120) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
             last = exc
-            # 403/429/5xx are often transient WAF/rate blocks — back off and retry.
             if exc.code in (403, 408, 429, 500, 502, 503, 504) and i < attempts - 1:
-                time.sleep(delay)
-                delay *= 2
-                continue
+                time.sleep(delay); delay *= 2; continue
             raise
         except Exception as exc:
             last = exc
             if i < attempts - 1:
-                time.sleep(delay)
-                delay *= 2
-                continue
+                time.sleep(delay); delay *= 2; continue
             raise
     if last:
         raise last
@@ -122,72 +107,80 @@ def get_stations() -> dict:
     return out
 
 
-def decode_series(arr: list) -> list:
-    if not arr or not isinstance(arr[0], (int, float)):
-        return []
-    begin = int(arr[0])
-    return [(begin + i, v) for i, v in enumerate(arr[1:]) if v is not None]
-
-
-def fetch_dump(md: str) -> dict:
-    return fetch_json(DUMP.format(md=md))
-
-
-def max_year_for(dump: dict, stations: dict) -> int:
-    best = 0
-    for triplet in stations:
-        arr = dump.get(triplet)
-        pairs = decode_series(arr) if arr else []
-        if pairs:
-            best = max(best, pairs[-1][0])
-    return best
-
-
-def pick_recent_dump(today: date, stations: dict):
-    freshest = None
-    for offset in range(DUMP_LOOKBACK + 1):
-        d = today - timedelta(days=offset)
-        try:
-            dump = fetch_dump(d.strftime("%m-%d"))
-        except Exception as exc:
-            print(f"  (skipping {d.isoformat()}: {exc})", file=sys.stderr)
+def _values_from_entry(entry: dict) -> list:
+    """Pull the [{date,value}, ...] list out of one data entry, shape-tolerant."""
+    vals = entry.get("values") or entry.get("data") or entry.get("elementValues") or []
+    out = []
+    for v in vals:
+        if not isinstance(v, dict):
             continue
-        if freshest is None:
-            freshest = (dump, d, False)
-        if max_year_for(dump, stations) == today.year:
-            return dump, d, True
-    return freshest if freshest else ({}, today, False)
+        d = v.get("date") or v.get("dateTime") or v.get("datetime")
+        val = v.get("value")
+        if val is None:
+            val = v.get("average")  # some shapes name it differently
+        if d is not None and val is not None:
+            out.append((str(d)[:10], float(val)))
+    return out
+
+
+def parse_series(resp: object) -> dict:
+    """AWDB /data response -> {triplet: [(YYYY-MM-DD, value), ...]} (shape-tolerant)."""
+    rows = resp if isinstance(resp, list) else resp.get("data") or resp.get("stationData") or []
+    series: dict[str, list] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        triplet = (row.get("stationTriplet") or row.get("station_triplet")
+                   or row.get("stationTripletId") or "")
+        pts = []
+        data = row.get("data") or row.get("stationElements") or row.get("elements") or []
+        if isinstance(data, list):
+            for entry in data:
+                if isinstance(entry, dict):
+                    pts.extend(_values_from_entry(entry))
+        # some shapes put values directly on the row
+        if not pts:
+            pts.extend(_values_from_entry(row))
+        if triplet:
+            series.setdefault(triplet, []).extend(pts)
+    return series
+
+
+def fetch_series(triplets: list, begin: str, end: str, batch: int) -> dict:
+    """Batched /data pull -> {triplet: [(date, value), ...]}, sorted ascending."""
+    merged: dict[str, list] = {}
+    for i in range(0, len(triplets), batch):
+        chunk = triplets[i:i + batch]
+        qs = urllib.parse.urlencode({
+            "stationTriplets": ",".join(chunk),
+            "elements": "WTEQ",
+            "duration": "DAILY",
+            "beginDate": begin,
+            "endDate": end,
+        })
+        try:
+            resp = fetch_json(f"{AWDB}/data?{qs}")
+        except Exception as exc:
+            print(f"  (data batch {i//batch} failed: {exc})", file=sys.stderr)
+            continue
+        for t, pts in parse_series(resp).items():
+            merged.setdefault(t, []).extend(pts)
+        time.sleep(0.1)  # be polite
+    for t in merged:
+        merged[t] = sorted(set(merged[t]))
+    return merged
 
 
 def band_for(pct):
-    if pct is None:
-        return "none"
-    if pct < 50:
-        return "far-below"
-    if pct < 80:
-        return "below"
-    if pct < 120:
-        return "near"
-    if pct < 150:
-        return "above"
+    if pct is None:      return "none"
+    if pct < 50:         return "far-below"
+    if pct < 80:         return "below"
+    if pct < 120:        return "near"
+    if pct < 150:        return "above"
     return "far-above"
 
 
-def station_facts(arr: list, current_year: int):
-    """Return (current, has_current, window_dict, median_window) or None."""
-    pairs = decode_series(arr)
-    if not pairs:
-        return None
-    last_year, current = pairs[-1]
-    window = {y: v for (y, v) in pairs if NORMALS_START <= y <= NORMALS_END}
-    if len(window) < MIN_NORMAL_YEARS:
-        return None  # no real normal -> not curated
-    med = median(window.values())
-    return current, (last_year == current_year), window, med
-
-
 def basin_distribution(curated: list) -> dict | None:
-    """Spread of the basin index (percent space) across the window years."""
     year_idx = []
     for y in range(NORMALS_START, NORMALS_END + 1):
         present = [s for s in curated if y in s["window"]]
@@ -197,14 +190,9 @@ def basin_distribution(curated: list) -> dict | None:
             year_idx.append(100.0 * num / den)
     if len(year_idx) < 4:
         return None
-    q = quantiles(year_idx, n=4)  # q[0]=Q1, q[1]=median, q[2]=Q3
-    return {
-        "min": round(min(year_idx)),
-        "q25": round(q[0]),
-        "median": round(q[1]),
-        "q75": round(q[2]),
-        "max": round(max(year_idx)),
-    }
+    q = quantiles(year_idx, n=4)
+    return {"min": round(min(year_idx)), "q25": round(q[0]), "median": round(q[1]),
+            "q75": round(q[2]), "max": round(max(year_idx))}
 
 
 def main() -> int:
@@ -213,34 +201,59 @@ def main() -> int:
     if not stations:
         print("WARNING: no HUC-14 stations returned; aborting.", file=sys.stderr)
         return 0
+    triplets = list(stations)
+    print(f"HUC-14 SNOTEL stations: {len(triplets)}")
 
-    dump, used_date, has_current = pick_recent_dump(today, stations)
-    if not dump:
-        print("WARNING: no WTEQ snapshot available; aborting.", file=sys.stderr)
+    # 1) Recent values -> each station's latest reading + date.
+    cur_begin = (today - timedelta(days=CURRENT_LOOKBACK_DAYS)).isoformat()
+    current_series = fetch_series(triplets, cur_begin, today.isoformat(), CUR_BATCH)
+    current = {}
+    for t, pts in current_series.items():
+        if pts:
+            d, v = pts[-1]          # latest available (handles the 1-2 day lag)
+            current[t] = (d, v)
+    print(f"Stations with a current value: {len(current)}")
+    if not current:
+        print("WARNING: no current values from /data; aborting.", file=sys.stderr)
         return 0
-    current_year = max_year_for(dump, stations) or today.year
 
-    # Gather curated stations per basin.
+    # 2) History 1991-2020 -> per-station full daily series (we self-compute medians).
+    hist = fetch_series(triplets, f"{NORMALS_START-1}-10-01",
+                        f"{NORMALS_END}-09-30", HIST_BATCH)
+    print(f"Stations with history returned: {len(hist)}")
+
+    # one-run shape check so any parse mismatch is obvious and one-line to fix
+    sample_t = next(iter(current), None)
+    if sample_t:
+        cd, cv = current[sample_t]
+        print(f"Decode check {sample_t} ({stations[sample_t]['name']}): "
+              f"current {cv} on {cd}; history points {len(hist.get(sample_t, []))}")
+
+    # 3) Build curated per-station facts.
     basins: dict[str, dict] = {}
-    for triplet, meta in stations.items():
-        arr = dump.get(triplet)
-        if not arr:
+    for t, meta in stations.items():
+        if t not in current:
             continue
-        facts = station_facts(arr, current_year)
-        if facts is None:
+        cur_date, cur_val = current[t]
+        target_md = cur_date[5:]   # MM-DD of the current reading
+        window = {}
+        for d, v in hist.get(t, []):
+            if d[5:] == target_md:
+                yr = int(d[:4])
+                if NORMALS_START <= yr <= NORMALS_END:
+                    window[yr] = v
+        if len(window) < MIN_NORMAL_YEARS:
             continue
-        current, has_cur, window, med = facts
-        if not has_cur:
-            continue
+        med = median(window.values())
         b = basins.setdefault(meta["basin"], {"huc4": meta["huc4"], "stations": []})
         b["stations"].append({
-            "triplet": triplet, "name": meta["name"], "elev": meta["elevation"],
-            "cur": round(current, 1), "median": round(med, 1),
-            "pct": round(100.0 * current / med) if med > 0 else None,
+            "triplet": t, "name": meta["name"], "elev": meta["elevation"],
+            "cur": round(cur_val, 1), "median": round(med, 1),
+            "pct": round(100.0 * cur_val / med) if med > 0 else None,
             "window": window,
         })
 
-    # Build per-basin output + compiled total.
+    # 4) Roll up.
     out_basins = []
     tot_cur = tot_med = 0.0
     tot_sites = 0
@@ -252,16 +265,10 @@ def main() -> int:
         sum_cur = sum(s["cur"] for s in sites)
         sum_med = sum(s["median"] for s in sites)
         idx = round(100.0 * sum_cur / sum_med) if sum_med > 0 else None
-        tot_cur += sum_cur
-        tot_med += sum_med
-        tot_sites += len(sites)
+        tot_cur += sum_cur; tot_med += sum_med; tot_sites += len(sites)
         out_basins.append({
-            "name": name,
-            "huc4": b["huc4"],
-            "index_pct": idx,
-            "band": band_for(idx),
-            "current_swe_in": round(sum_cur, 1),
-            "median_swe_in": round(sum_med, 1),
+            "name": name, "huc4": b["huc4"], "index_pct": idx, "band": band_for(idx),
+            "current_swe_in": round(sum_cur, 1), "median_swe_in": round(sum_med, 1),
             "sites_reporting": len(sites),
             "distribution_pct": basin_distribution(sites),
             "status": ("normally snow-free by this date" if sum_med < 0.05 else None),
@@ -273,23 +280,23 @@ def main() -> int:
 
     compiled_idx = round(100.0 * tot_cur / tot_med) if tot_med > 0 else None
     now = datetime.now(ARIZONA)
+    as_of = max((current[t][0] for t in current), default=today.isoformat())
 
     out = {
         "module": "snowpack_basins",
         "title": "Upper Colorado Basin Snowpack",
-        "as_of": used_date.isoformat(),
-        "as_of_current_year": current_year,
+        "as_of": as_of,
         "generated_at_display": now.strftime("%B %-d, %Y, %-I:%M %p Arizona time"),
         "normals_window": f"{NORMALS_START}-{NORMALS_END}",
         "min_normal_years": MIN_NORMAL_YEARS,
         "method": ("Basin index = sum(current SWE) / sum(per-station {a}-{b} median SWE) "
                    "across reporting SNOTEL stations with at least {n} years of record in "
-                   "that window. Distribution shows the spread of the same index across the "
-                   "window years.").format(a=NORMALS_START, b=NORMALS_END, n=MIN_NORMAL_YEARS),
-        "source_name": "USDA NRCS SNOTEL (Air & Water Database)",
-        "source_url": "https://www.nrcs.usda.gov/resources/data-and-reports/snow-and-water-interactive-map",
+                   "that window. Current values and history are pulled from the NRCS AWDB "
+                   "REST /data endpoint; medians are computed by WaterLineWest."
+                   ).format(a=NORMALS_START, b=NORMALS_END, n=MIN_NORMAL_YEARS),
+        "source_name": "USDA NRCS SNOTEL (AWDB REST API)",
+        "source_url": "https://wcc.sc.egov.usda.gov/awdbRestApi/swagger-ui/index.html",
         "provisional": True,
-        "data_freshness": "live current-year reading" if has_current else "newest available (archive lag)",
         "compiled": {
             "label": "Entire Upper Colorado",
             "index_pct": compiled_idx,
@@ -306,16 +313,10 @@ def main() -> int:
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"snowpack-basins.json written: entire UC {out['compiled']['display_value']} "
-          f"of median, {tot_sites} curated sites, as of {used_date.isoformat()}.")
+          f"of median, {tot_sites} curated sites, as of {as_of}.")
     for b in out_basins:
         print(f"  {b['name']:<24} {str(b['index_pct']) + '%':>6}  ({b['sites_reporting']} sites)"
               + (f"  [{b['status']}]" if b["status"] else ""))
-        if b["index_pct"] is None:
-            print(f"        median sum {b['median_swe_in']} in, current sum {b['current_swe_in']} in "
-                  f"\u2014 per-station 1991-2020 median (in):")
-            for s in b["stations"]:
-                print(f"          {s['name'][:24]:<24} elev {str(s['elev']):>5}  "
-                      f"cur {s['cur']:>5}  median {s['median']:>5}")
     return 0
 
 
