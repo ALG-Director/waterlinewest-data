@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import json
 import sys
+import time
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -51,15 +52,31 @@ def api_url(datatype_id: str) -> str:
     return f"https://www.usbr.gov/uc/water/hydrodata/reservoir_data/{RES_ID}/json/{datatype_id}.json"
 
 
-def fetch_series(url: str) -> list:
-    """Return the ascending [[date, value], ...] data array from a HydroData JSON."""
-    req = urllib.request.Request(url, headers={"User-Agent": "WaterLineWest/1.0"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        payload = json.loads(resp.read().decode("utf-8"))
-    data = payload.get("data", [])
-    # Keep only well-formed [date, numeric] rows.
-    clean = [(str(d)[:10], float(v)) for d, v in data if v is not None]
-    return clean
+def fetch_series(url: str, attempts: int = 3) -> list:
+    """Return the ascending [[date, value], ...] data array from a HydroData JSON.
+
+    Retries with backoff and a generous timeout — the release file (period of
+    record) can be slow, and a single slow moment shouldn't skip the series.
+    """
+    delay = 2.0
+    last = None
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "WaterLineWest/1.0"})
+            with urllib.request.urlopen(req, timeout=90) as resp:
+                payload = json.loads(resp.read().decode("utf-8"))
+            data = payload.get("data", [])
+            # Keep only well-formed [date, numeric] rows.
+            return [(str(d)[:10], float(v)) for d, v in data if v is not None]
+        except Exception as exc:
+            last = exc
+            if i < attempts - 1:
+                time.sleep(delay)
+                delay *= 2
+                continue
+            raise
+    if last:
+        raise last
 
 
 def fmt(value: float, rnd: int) -> str:
