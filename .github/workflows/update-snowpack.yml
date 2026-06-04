@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+      - name: Update snowpack basins
+        run: python scripts/update_snowpack_basins.py
       - name: Update Lees Ferry Flow
         run: python scripts/update_lees_ferry.py
       - name: Update Lake Powell elevation
