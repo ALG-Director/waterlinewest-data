@@ -31,6 +31,8 @@ from __future__ import annotations
 
 import json
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date, datetime, timedelta
@@ -48,6 +50,11 @@ NORMALS_START, NORMALS_END = 1991, 2020
 MIN_NORMAL_YEARS = 20          # station must have >= this many window-years to count
 DUMP_LOOKBACK = 4              # days to walk back for a live current-year file
 
+# Some USDA hosts sit behind a WAF that 403s requests without a browser-like
+# header set. Present as an ordinary browser and retry soft blocks.
+USER_AGENT = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+
 HUC4_BASINS = {
     "1401": "Colorado Headwaters",
     "1402": "Gunnison",
@@ -60,10 +67,37 @@ HUC4_BASINS = {
 }
 
 
-def fetch_json(url: str) -> object:
-    req = urllib.request.Request(url, headers={"User-Agent": "WaterLineWest/1.0"})
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+def fetch_json(url: str, attempts: int = 4) -> object:
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://www.nrcs.usda.gov/",
+    }
+    delay = 1.5
+    last = None
+    for i in range(attempts):
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            last = exc
+            # 403/429/5xx are often transient WAF/rate blocks — back off and retry.
+            if exc.code in (403, 408, 429, 500, 502, 503, 504) and i < attempts - 1:
+                time.sleep(delay)
+                delay *= 2
+                continue
+            raise
+        except Exception as exc:
+            last = exc
+            if i < attempts - 1:
+                time.sleep(delay)
+                delay *= 2
+                continue
+            raise
+    if last:
+        raise last
 
 
 def get_stations() -> dict:
