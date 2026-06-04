@@ -264,7 +264,7 @@ def main() -> int:
             "median_swe_in": round(sum_med, 1),
             "sites_reporting": len(sites),
             "distribution_pct": basin_distribution(sites),
-            "status": "melted out" if sum_med < 0.05 else None,
+            "status": ("normally snow-free by this date" if sum_med < 0.05 else None),
             "stations": [
                 {k: s[k] for k in ("triplet", "name", "elev", "cur", "median", "pct")}
                 for s in sorted(sites, key=lambda s: (s["elev"] or 0), reverse=True)
@@ -308,7 +308,14 @@ def main() -> int:
     print(f"snowpack-basins.json written: entire UC {out['compiled']['display_value']} "
           f"of median, {tot_sites} curated sites, as of {used_date.isoformat()}.")
     for b in out_basins:
-        print(f"  {b['name']:<24} {str(b['index_pct']) + '%':>5}  ({b['sites_reporting']} sites)")
+        print(f"  {b['name']:<24} {str(b['index_pct']) + '%':>6}  ({b['sites_reporting']} sites)"
+              + (f"  [{b['status']}]" if b["status"] else ""))
+        if b["index_pct"] is None:
+            print(f"        median sum {b['median_swe_in']} in, current sum {b['current_swe_in']} in "
+                  f"\u2014 per-station 1991-2020 median (in):")
+            for s in b["stations"]:
+                print(f"          {s['name'][:24]:<24} elev {str(s['elev']):>5}  "
+                      f"cur {s['cur']:>5}  median {s['median']:>5}")
     return 0
 
 
