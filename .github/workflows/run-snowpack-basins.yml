@@ -1,0 +1,22 @@
+name: Run Snowpack Basins (manual preview)
+
+# Runs the basin updater and prints the curated numbers to the log.
+# It writes docs/snowpack-basins.json on the runner but does NOT commit it —
+# this is for eyeballing the curated total against NRCS before we schedule it.
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Build snowpack-basins.json (preview, no commit)
+        run: python scripts/update_snowpack_basins.py
