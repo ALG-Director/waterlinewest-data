@@ -24,7 +24,9 @@ jobs:
         run: python scripts/update_dam_release.py
       - name: Update Grand Canyon flow + vs-median
         run: python scripts/update_grand_canyon.py
-      - name: Update Tributary inflow
+      - name: Update Lake Mead
+        run: python scripts/update_lake_mead.py
+      - name: Update Tributary inflo
         run: python scripts/update_tributary_inflow.py
       - name: Append daily history
         run: python scripts/update_history_append.py
