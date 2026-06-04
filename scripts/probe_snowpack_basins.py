@@ -25,7 +25,7 @@ import json
 import sys
 import urllib.parse
 import urllib.request
-from datetime import date
+from datetime import date, timedelta
 from statistics import median, mean
 
 AWDB = "https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1"
@@ -74,8 +74,41 @@ def get_stations() -> dict:
 
 
 def fetch_dump(md: str) -> dict:
-    """Today's WTEQ snapshot: {triplet: [begin_year, v_yr1, v_yr2, ... v_latest]}."""
+    """One WTEQ by-date snapshot: {triplet: [begin_year, v_yr1, ... v_latest]}."""
     return fetch_json(DUMP.format(md=md))
+
+
+def max_year_for(dump: dict, stations: dict) -> int:
+    """Newest year present across the stations we care about (0 if none)."""
+    best = 0
+    for triplet in stations:
+        arr = dump.get(triplet)
+        pairs = decode_series(arr) if arr else []
+        if pairs:
+            best = max(best, pairs[-1][0])
+    return best
+
+
+def pick_recent_dump(today: date, stations: dict, lookback: int = 4):
+    """
+    Walk back from today to the freshest by-date file that already contains a
+    current-year reading. NRCS backfills this year's value into these archive
+    files a day or two late, so today's file is often still a year behind.
+    Returns (dump, used_date, has_current).
+    """
+    freshest = None
+    for offset in range(lookback + 1):
+        d = today - timedelta(days=offset)
+        try:
+            dump = fetch_dump(d.strftime("%m-%d"))
+        except Exception as exc:
+            print(f"  (skipping {d.isoformat()}: {exc})", file=sys.stderr)
+            continue
+        if freshest is None:
+            freshest = (dump, d, False)
+        if max_year_for(dump, stations) == today.year:
+            return dump, d, True
+    return (freshest if freshest else ({}, today, False))
 
 
 def decode_series(arr: list) -> list:
@@ -99,16 +132,24 @@ def station_reading(arr: list, this_year: int) -> tuple | None:
 
 def main() -> int:
     today = date.today()
-    md = today.strftime("%m-%d")
     this_year = today.year
 
-    print(f"Upper Colorado SNOTEL probe  |  as of {today.isoformat()}  "
-          f"(WTEQ daily snapshot {md})\n")
+    print(f"Upper Colorado SNOTEL probe  |  run {today.isoformat()}\n")
 
     stations = get_stations()
     print(f"Stations in HUC region 14 (SNOTEL, WTEQ): {len(stations)}")
-    dump = fetch_dump(md)
-    print(f"Stations in today's WTEQ snapshot:        {len(dump)}\n")
+
+    dump, used_date, has_current = pick_recent_dump(today, stations)
+    md = used_date.strftime("%m-%d")
+    note = "live current-year reading" if has_current else "NO current-year reading found"
+    print(f"Freshest snapshot with data:              {used_date.isoformat()} "
+          f"({len(dump)} stations) -> {note}")
+    if not has_current:
+        print("WARNING: no current-year value in the last few daily files; the "
+              "by-date archive may be lagging. Numbers below use the newest year "
+              "available and should be treated as provisional.\n", file=sys.stderr)
+    else:
+        print()
 
     # Show how we're decoding one real station, so the year-mapping is auditable.
     sample = next((t for t in stations if t in dump), None)
@@ -120,13 +161,17 @@ def main() -> int:
                   f"{len(pairs)} yrs {yrs}; latest {pairs[-1][0]}={pairs[-1][1]} in")
             print()
 
+    # Treat the freshest available year as "current" (so a 1-2 day archive lag
+    # doesn't zero everything out); discontinued stations stay excluded below.
+    current_year = max_year_for(dump, stations) or this_year
+
     basins: dict[str, dict] = {}
     stale = 0
     for triplet, meta in stations.items():
         arr = dump.get(triplet)
         if not arr:
             continue
-        reading = station_reading(arr, this_year)
+        reading = station_reading(arr, current_year)
         if reading is None:
             continue
         current, med, is_current = reading
