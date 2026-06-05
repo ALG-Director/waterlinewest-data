@@ -43,6 +43,16 @@ RESERVOIRS = [
 ]
 
 
+def day_of_year_key(d: date) -> int:
+    """Identical to update_history_append.day_of_year_key: leap-folded 1..365."""
+    doy = d.timetuple().tm_yday
+    if (d.month, d.day) == (2, 29):
+        return 59
+    if d.month > 2 and (d.year % 4 == 0 and (d.year % 100 != 0 or d.year % 400 == 0)):
+        doy -= 1
+    return min(max(doy, 1), 365)
+
+
 def dv_url(site: str, param: str) -> str:
     end = datetime.now().date().isoformat()
     return ("https://waterservices.usgs.gov/nwis/dv/?format=json"
@@ -97,10 +107,10 @@ def fetch_history(site: str, param: str, offset: float) -> list:
 def build_indicator(points: list) -> dict | None:
     if not points:
         return None
-    # day-of-year envelope (calendar doy 1..366)
+    # day-of-year envelope (leap-folded calendar doy 1..365, matching the appender)
     buckets: dict[int, list] = {}
     for d, v in points:
-        buckets.setdefault(d.timetuple().tm_yday, []).append(v)
+        buckets.setdefault(day_of_year_key(d), []).append(v)
     doy_stats = {}
     for doy, vals in buckets.items():
         doy_stats[str(doy)] = {
