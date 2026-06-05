@@ -2,14 +2,14 @@
 """
 DAILY APPEND: keep docs/history-stats.json current.
 
-Runs in the daily workflow AFTER the three updater scripts have written
+Runs in the daily workflow AFTER the updater scripts have written
 docs/snowpack-status.json. It reads today's freshly-published values straight
 out of snowpack-status.json (no extra API calls) and appends them to each
 indicator's recent[] window, trimming to recent_days.
 
 It also refreshes today's day-of-year envelope slot with the new observation so
 the "normal" band keeps learning over time. (A full envelope rebuild only
-happens when you re-run backfill_history.py; this is a light touch-up.)
+happens when you re-run the backfill scripts; this is a light touch-up.)
 
 Soft-fail: if the history file or a value is missing, it logs and exits 0 so the
 rest of the workflow still commits.
@@ -34,6 +34,8 @@ TRACKED = {
     "grand_canyon_inflow": 0,
     "mead_elevation": 2,
     "hoover_release": 0,
+    "mohave_elevation": 2,
+    "havasu_elevation": 2,
 }
 
 
@@ -49,7 +51,7 @@ def parse_display_value(raw) -> float | None:
 
 def observed_date(indicator: dict) -> str:
     """Best-effort YYYY-MM-DD for the observation; falls back to today (UTC)."""
-    for k in ("usgs_observed_datetime", "usbr_observed_date"):
+    for k in ("usgs_observed_datetime", "usgs_observed_date", "usbr_observed_date"):
         v = indicator.get(k)
         if v:
             return str(v)[:10]
@@ -67,7 +69,7 @@ def day_of_year_key(d: date) -> int:
 
 def main() -> int:
     if not HISTORY_PATH.exists():
-        print(f"WARNING: {HISTORY_PATH} missing — run backfill_history.py once first. "
+        print(f"WARNING: {HISTORY_PATH} missing — run the backfill scripts once first. "
               f"Skipping append.", file=sys.stderr)
         return 0
     if not STATUS_PATH.exists():
