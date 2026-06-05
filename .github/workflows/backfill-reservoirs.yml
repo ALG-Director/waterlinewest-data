@@ -1,0 +1,24 @@
+name: Backfill reservoirs history (manual)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Seed Mohave & Havasu history
+        run: python scripts/backfill_lower_reservoirs.py
+      - name: Commit history-stats.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/history-stats.json
+          git commit -m "Backfill Lake Mohave & Lake Havasu history" || echo "nothing to commit"
+          git push
