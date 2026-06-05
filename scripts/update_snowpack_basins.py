@@ -36,6 +36,7 @@ from statistics import median, quantiles
 from zoneinfo import ZoneInfo
 
 OUT_PATH = Path("docs/snowpack-basins.json")
+STATUS_PATH = Path("docs/snowpack-status.json")
 ARIZONA = ZoneInfo("America/Phoenix")
 
 AWDB = "https://wcc.sc.egov.usda.gov/awdbRestApi/services/v1"
@@ -245,6 +246,32 @@ def build_swe_history(curated: list, current_series: dict, hist: dict) -> dict:
     }
 
 
+def write_status_value(display_value: str, as_of_iso: str) -> None:
+    """Write the computed snowpack index back into snowpack-status.json so the
+    Snowpack module's hero pill shows the live, basin-computed number.
+
+    Reads the file, updates ONLY upper_basin_snow's display_value + timestamp
+    (every other field and indicator is preserved), and writes it back.
+    Soft-fails on any error: a hiccup here must never break the basins output."""
+    try:
+        status = json.loads(STATUS_PATH.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print(f"NOTE: snowpack-status.json not updated ({exc}); leaving prior pill value.")
+        return
+    try:
+        stamp = datetime.strptime(as_of_iso, "%Y-%m-%d").strftime("Observed %B %-d, %Y")
+    except Exception:
+        stamp = f"Observed {as_of_iso}"
+    item = status.setdefault("indicators", {}).setdefault("upper_basin_snow", {})
+    item["display_value"] = display_value
+    item["timestamp"] = stamp
+    try:
+        STATUS_PATH.write_text(json.dumps(status, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(f"snowpack-status.json updated: upper_basin_snow = {display_value} ({stamp}).")
+    except Exception as exc:
+        print(f"NOTE: could not write snowpack-status.json ({exc}); leaving prior pill value.")
+
+
 def main() -> int:
     today = date.today()
     stations = get_stations()
@@ -374,6 +401,12 @@ def main() -> int:
     for b in out_basins:
         print(f"  {b['name']:<24} {str(b['index_pct']) + '%':>6}  ({b['sites_reporting']} sites)"
               + (f"  [{b['status']}]" if b["status"] else ""))
+
+    # Wire the module hero pill to the live number (path 1): write the computed
+    # index back into snowpack-status.json. Only when we have a real index.
+    if out["compiled"]["index_pct"] is not None:
+        write_status_value(out["compiled"]["display_value"], as_of)
+
     return 0
 
 
