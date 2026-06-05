@@ -195,6 +195,56 @@ def basin_distribution(curated: list) -> dict | None:
             "q75": round(q[2]), "max": round(max(year_idx))}
 
 
+def _doy_key(d: date) -> int:
+    """Calendar day-of-year folded to a fixed 1-365 axis (matches the gauges)."""
+    doy = d.timetuple().tm_yday
+    if (d.month, d.day) == (2, 29):
+        return 59
+    if d.month > 2 and (d.year % 4 == 0 and (d.year % 100 != 0 or d.year % 400 == 0)):
+        doy -= 1
+    return min(max(doy, 1), 365)
+
+
+def build_swe_history(curated: list, current_series: dict, hist: dict) -> dict:
+    """Entire-UC mean SWE for the master graph: 1991-2020 doy envelope + current-WY line.
+
+    Emitted in the same shape the detail-page chart engine reads for the gauges
+    (doy_stats keyed by calendar day-of-year, recent[] as {d, v})."""
+    # recent: daily mean SWE across curated stations, this water year
+    by_date: dict[str, list] = {}
+    for t in curated:
+        for ds, v in current_series.get(t, []):
+            by_date.setdefault(ds, []).append(v)
+    recent = [{"d": ds, "v": round(sum(vs) / len(vs), 2)}
+              for ds, vs in sorted(by_date.items()) if vs]
+
+    # envelope: per day-of-year, the mean SWE across stations each year, then min/med/max
+    doy_year: dict[int, dict] = {}
+    for t in curated:
+        for ds, v in hist.get(t, []):
+            try:
+                d = date.fromisoformat(ds)
+            except ValueError:
+                continue
+            doy_year.setdefault(_doy_key(d), {}).setdefault(d.year, []).append(v)
+    doy_stats = {}
+    for k, years in doy_year.items():
+        means = [sum(vs) / len(vs) for vs in years.values() if vs]
+        if means:
+            doy_stats[str(k)] = {"min": round(min(means), 2),
+                                 "med": round(median(means), 2),
+                                 "max": round(max(means), 2)}
+    return {
+        "label": "Upper Colorado Snowpack",
+        "unit": "in",
+        "years_of_record": NORMALS_END - NORMALS_START + 1,
+        "record_start": f"{NORMALS_START}-10-01",
+        "record_end": f"{NORMALS_END}-09-30",
+        "doy_stats": doy_stats,
+        "recent": recent,
+    }
+
+
 def main() -> int:
     today = date.today()
     stations = get_stations()
@@ -204,9 +254,10 @@ def main() -> int:
     triplets = list(stations)
     print(f"HUC-14 SNOTEL stations: {len(triplets)}")
 
-    # 1) Recent values -> each station's latest reading + date.
-    cur_begin = (today - timedelta(days=CURRENT_LOOKBACK_DAYS)).isoformat()
-    current_series = fetch_series(triplets, cur_begin, today.isoformat(), CUR_BATCH)
+    # 1) Current water year (Oct 1 -> today): gives each station's latest value
+    #    AND the daily series we average into the master-graph snowpack line.
+    wy_start = date(today.year - 1, 10, 1) if today.month < 10 else date(today.year, 10, 1)
+    current_series = fetch_series(triplets, wy_start.isoformat(), today.isoformat(), CUR_BATCH)
     current = {}
     for t, pts in current_series.items():
         if pts:
@@ -231,6 +282,7 @@ def main() -> int:
 
     # 3) Build curated per-station facts.
     basins: dict[str, dict] = {}
+    curated_triplets = []
     for t, meta in stations.items():
         if t not in current:
             continue
@@ -244,6 +296,7 @@ def main() -> int:
                     window[yr] = v
         if len(window) < MIN_NORMAL_YEARS:
             continue
+        curated_triplets.append(t)
         med = median(window.values())
         b = basins.setdefault(meta["basin"], {"huc4": meta["huc4"], "stations": []})
         b["stations"].append({
@@ -281,6 +334,9 @@ def main() -> int:
     compiled_idx = round(100.0 * tot_cur / tot_med) if tot_med > 0 else None
     now = datetime.now(ARIZONA)
     as_of = max((current[t][0] for t in current), default=today.isoformat())
+    swe_history = build_swe_history(curated_triplets, current_series, hist)
+    print(f"swe_history: {len(swe_history['recent'])} current-WY points, "
+          f"{len(swe_history['doy_stats'])} envelope days")
 
     out = {
         "module": "snowpack_basins",
@@ -308,6 +364,7 @@ def main() -> int:
             "sites": tot_sites,
         },
         "basins": out_basins,
+        "swe_history": swe_history,
     }
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
