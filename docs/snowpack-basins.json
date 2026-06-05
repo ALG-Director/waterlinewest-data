@@ -2,7 +2,7 @@
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
   "as_of": "2026-06-04",
-  "generated_at_display": "June 5, 2026, 11:45 AM Arizona time",
+  "generated_at_display": "June 5, 2026, 12:29 PM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,11 +11,11 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 9,
-    "display_value": "9%",
+    "index_pct": 8,
+    "display_value": "8%",
     "note": "of median",
     "band": "far-below",
-    "current_swe_in": 14.1,
+    "current_swe_in": 13.7,
     "median_swe_in": 161.5,
     "sites": 116
   },
@@ -427,8 +427,8 @@
         "min": 0,
         "q25": 29,
         "median": 114,
-        "q75": 226,
-        "max": 819
+        "q75": 230,
+        "max": 826
       },
       "status": null,
       "stations": [
@@ -728,9 +728,9 @@
     {
       "name": "Lower Green / Duchesne",
       "huc4": "1406",
-      "index_pct": 4,
+      "index_pct": 0,
       "band": "far-below",
-      "current_swe_in": 0.4,
+      "current_swe_in": 0.0,
       "median_swe_in": 10.4,
       "sites_reporting": 20,
       "distribution_pct": {
@@ -866,7 +866,7 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.4,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -3841,7 +3841,7 @@
       },
       {
         "d": "2026-05-18",
-        "v": 1.1
+        "v": 1.08
       },
       {
         "d": "2026-05-19",
