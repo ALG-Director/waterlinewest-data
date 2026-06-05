@@ -246,13 +246,14 @@ def build_swe_history(curated: list, current_series: dict, hist: dict) -> dict:
     }
 
 
-def write_status_value(display_value: str, as_of_iso: str) -> None:
-    """Write the computed snowpack index back into snowpack-status.json so the
-    Snowpack module's hero pill shows the live, basin-computed number.
+def write_status_value(compiled: dict, as_of_iso: str) -> None:
+    """Write the computed snowpack figures back into snowpack-status.json so the
+    Snowpack module's hero pill AND info panel show the live, basin-computed
+    numbers (percent, current SWE inches, median SWE inches).
 
-    Reads the file, updates ONLY upper_basin_snow's display_value + timestamp
-    (every other field and indicator is preserved), and writes it back.
-    Soft-fails on any error: a hiccup here must never break the basins output."""
+    Reads the file, updates ONLY upper_basin_snow's fields (every other field and
+    indicator is preserved), and writes it back. Soft-fails on any error: a hiccup
+    here must never break the basins output."""
     try:
         status = json.loads(STATUS_PATH.read_text(encoding="utf-8"))
     except Exception as exc:
@@ -263,11 +264,19 @@ def write_status_value(display_value: str, as_of_iso: str) -> None:
     except Exception:
         stamp = f"Observed {as_of_iso}"
     item = status.setdefault("indicators", {}).setdefault("upper_basin_snow", {})
-    item["display_value"] = display_value
+    item["display_value"] = compiled.get("display_value")
     item["timestamp"] = stamp
+    # Per-site mean inches — current_swe_in / median_swe_in are sums across the
+    # same curated sites, so mean = sum / sites, and mean_cur / mean_med == index.
+    sites = compiled.get("sites") or 0
+    if sites and compiled.get("current_swe_in") is not None:
+        item["swe_in"] = round(compiled["current_swe_in"] / sites, 1)
+    if sites and compiled.get("median_swe_in") is not None:
+        item["median_in"] = round(compiled["median_swe_in"] / sites, 1)
     try:
         STATUS_PATH.write_text(json.dumps(status, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        print(f"snowpack-status.json updated: upper_basin_snow = {display_value} ({stamp}).")
+        print(f"snowpack-status.json updated: upper_basin_snow = {item['display_value']} "
+              f"({stamp}); SWE {item.get('swe_in')} in / median {item.get('median_in')} in.")
     except Exception as exc:
         print(f"NOTE: could not write snowpack-status.json ({exc}); leaving prior pill value.")
 
@@ -405,7 +414,7 @@ def main() -> int:
     # Wire the module hero pill to the live number (path 1): write the computed
     # index back into snowpack-status.json. Only when we have a real index.
     if out["compiled"]["index_pct"] is not None:
-        write_status_value(out["compiled"]["display_value"], as_of)
+        write_status_value(out["compiled"], as_of)
 
     return 0
 
