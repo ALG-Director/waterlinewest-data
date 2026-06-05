@@ -29,6 +29,9 @@ jobs:
         run: python scripts/update_grand_canyon.py
       - name: Update Lake Mead
         run: python scripts/update_lake_mead.py
+      - name: Update lower reservoirs (Mohave & Havasu)
+        run: python scripts/update_lower_reservoirs.py
+        continue-on-error: true
       - name: Update Tributary inflo
         run: python scripts/update_tributary_inflow.py
       - name: Append daily history
