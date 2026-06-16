@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-06-13",
-  "generated_at_display": "June 14, 2026, 8:16 AM Arizona time",
+  "as_of": "2026-06-15",
+  "generated_at_display": "June 16, 2026, 11:09 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,29 +11,29 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 4,
-    "display_value": "4%",
+    "index_pct": 2,
+    "display_value": "2%",
     "note": "of median",
     "band": "far-below",
-    "current_swe_in": 2.0,
-    "median_swe_in": 46.9,
+    "current_swe_in": 0.8,
+    "median_swe_in": 35.5,
     "sites": 116
   },
   "basins": [
     {
       "name": "Colorado Headwaters",
       "huc4": "1401",
-      "index_pct": 3,
+      "index_pct": 5,
       "band": "far-below",
       "current_swe_in": 0.5,
-      "median_swe_in": 14.4,
+      "median_swe_in": 10.4,
       "sites_reporting": 27,
       "distribution_pct": {
         "min": 0,
-        "q25": 20,
+        "q25": 8,
         "median": 135,
         "q75": 330,
-        "max": 1779
+        "max": 1925
       },
       "status": null,
       "stations": [
@@ -42,7 +42,7 @@
           "name": "Fremont Pass",
           "elev": 11310.0,
           "cur": 0.0,
-          "median": 4.4,
+          "median": 3.1,
           "pct": 0
         },
         {
@@ -66,7 +66,7 @@
           "name": "Arapaho Ridge",
           "elev": 10960.0,
           "cur": 0.0,
-          "median": 1.6,
+          "median": 0.5,
           "pct": 0
         },
         {
@@ -74,7 +74,7 @@
           "name": "Bison Lake",
           "elev": 10950.0,
           "cur": 0.1,
-          "median": 8.4,
+          "median": 6.8,
           "pct": 1
         },
         {
@@ -113,7 +113,7 @@
           "triplet": "547:CO:SNTL",
           "name": "Ivanhoe",
           "elev": 10540.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -217,7 +217,7 @@
           "triplet": "1014:CO:SNTL",
           "name": "Middle Fork Camp",
           "elev": 8960.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -412,17 +412,17 @@
     {
       "name": "Upper Green",
       "huc4": "1404",
-      "index_pct": 4,
+      "index_pct": 0,
       "band": "far-below",
-      "current_swe_in": 0.2,
-      "median_swe_in": 5.1,
+      "current_swe_in": 0.0,
+      "median_swe_in": 2.3,
       "sites_reporting": 19,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 115,
-        "q75": 690,
-        "max": 3167
+        "median": 126,
+        "q75": 1068,
+        "max": 6074
       },
       "status": null,
       "stations": [
@@ -503,14 +503,14 @@
           "name": "Spring Creek Divide",
           "elev": 9020.0,
           "cur": 0.0,
-          "median": 0.3,
-          "pct": 0
+          "median": 0.0,
+          "pct": null
         },
         {
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -519,7 +519,7 @@
           "name": "Blind Bull Sum",
           "elev": 8880.0,
           "cur": 0.0,
-          "median": 4.8,
+          "median": 2.3,
           "pct": 0
         },
         {
@@ -574,7 +574,7 @@
           "triplet": "555:WY:SNTL",
           "name": "Kendall R.S.",
           "elev": 7790.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         }
@@ -586,14 +586,14 @@
       "index_pct": 0,
       "band": "far-below",
       "current_swe_in": 0.0,
-      "median_swe_in": 20.1,
+      "median_swe_in": 17.8,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
-        "q25": 30,
-        "median": 106,
-        "q75": 212,
-        "max": 821
+        "q25": 12,
+        "median": 100,
+        "q75": 223,
+        "max": 807
       },
       "status": null,
       "stations": [
@@ -602,7 +602,7 @@
           "name": "Tower",
           "elev": 10610.0,
           "cur": 0.0,
-          "median": 19.5,
+          "median": 17.8,
           "pct": 0
         },
         {
@@ -610,8 +610,8 @@
           "name": "Ripple Creek",
           "elev": 10340.0,
           "cur": 0.0,
-          "median": 0.6,
-          "pct": 0
+          "median": 0.0,
+          "pct": null
         },
         {
           "triplet": "827:CO:SNTL",
@@ -722,25 +722,19 @@
     {
       "name": "Lower Green / Duchesne",
       "huc4": "1406",
-      "index_pct": 300,
-      "band": "far-above",
-      "current_swe_in": 0.6,
-      "median_swe_in": 0.2,
+      "index_pct": null,
+      "band": "none",
+      "current_swe_in": 0.0,
+      "median_swe_in": 0.0,
       "sites_reporting": 20,
-      "distribution_pct": {
-        "min": 0,
-        "q25": 0,
-        "median": 200,
-        "q75": 10288,
-        "max": 75800
-      },
-      "status": null,
+      "distribution_pct": null,
+      "status": "normally snow-free by this date",
       "stations": [
         {
           "triplet": "481:UT:SNTL",
           "name": "Five Points Lake",
           "elev": 10920.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -749,8 +743,8 @@
           "name": "Lakefork Basin",
           "elev": 10890.0,
           "cur": 0.0,
-          "median": 0.2,
-          "pct": 0
+          "median": 0.0,
+          "pct": null
         },
         {
           "triplet": "368:UT:SNTL",
@@ -860,7 +854,7 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.3,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -884,7 +878,7 @@
           "triplet": "432:UT:SNTL",
           "name": "Currant Creek",
           "elev": 7920.0,
-          "cur": 0.2,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -946,17 +940,17 @@
     {
       "name": "San Juan",
       "huc4": "1408",
-      "index_pct": 7,
+      "index_pct": 2,
       "band": "far-below",
-      "current_swe_in": 0.5,
-      "median_swe_in": 7.1,
+      "current_swe_in": 0.1,
+      "median_swe_in": 5.0,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 127,
-        "q75": 427,
-        "max": 2503
+        "median": 136,
+        "q75": 491,
+        "max": 3120
       },
       "status": null,
       "stations": [
@@ -981,7 +975,7 @@
           "name": "Wolf Creek Summit",
           "elev": 10930.0,
           "cur": 0.0,
-          "median": 4.0,
+          "median": 1.9,
           "pct": 0
         },
         {
@@ -996,7 +990,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.3,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -1012,7 +1006,7 @@
           "triplet": "780:CO:SNTL",
           "name": "Spud Mountain",
           "elev": 10660.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -1028,7 +1022,7 @@
           "triplet": "840:CO:SNTL",
           "name": "Upper San Juan",
           "elev": 10140.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -3911,7 +3905,7 @@
       },
       {
         "d": "2026-06-06",
-        "v": 0.07
+        "v": 0.06
       },
       {
         "d": "2026-06-07",
@@ -3931,15 +3925,23 @@
       },
       {
         "d": "2026-06-11",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-06-12",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-06-13",
-        "v": 0.02
+        "v": 0.01
+      },
+      {
+        "d": "2026-06-14",
+        "v": 0.01
+      },
+      {
+        "d": "2026-06-15",
+        "v": 0.01
       }
     ]
   }
