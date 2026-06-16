@@ -2,129 +2,94 @@
 """
 update_cap_diversion.py  --  WaterLineWest / Colorado River Water Scout
 
-Publishes the `cap_diversion` indicator into docs/snowpack-status.json from the
-Bureau of Reclamation Lower Colorado "Lower Colorado River Daily Report" feed.
+Publishes the `cap_diversion` indicator into docs/snowpack-status.json.
 
-Source (human page):  https://www.usbr.gov/lc/region/g4000/hourly/levels.html
-Source (machine feed): https://www.usbr.gov/lc/region/g4000/riverops/webreports/accumweb.json
+SOURCE NOTE: Reclamation's machine feed (accumweb.json) defines a "CAP Canal
+Export" series (SDI 3413) but leaves its values BLANK -- the column exists, the
+numbers don't. The actual CAP diversion figures are only published in the human
+"Lower Colorado River Daily Report" table on levels.html. So this script parses
+that report's ACCUMULATIONS table directly.
 
-The feed is a {"Series":[ {SDI, SiteName, DataTypeName, DataTypeUnit, Data:[{t,v}...]}, ... ]}
-structure of daily values, 365 days back. The C.A.P. diversion series gives us
-everything the 6A module needs from one place:
-    - latest non-empty daily value  -> headline (display_value, AF/day)
-    - sum of the current calendar month -> month-to-date (fixes the static 26,634 cell)
-    - 7-day trailing average vs latest  -> trend (rising / falling / steady)
+  https://www.usbr.gov/lc/region/g4000/hourly/levels.html
 
-DISCOVERY: we do NOT hard-code an SDI. On every run the script lists every series
-in the feed (SDI | SiteName | DataTypeName) so you can see exactly what's there,
-then auto-selects the CAP series by keyword. If you want to pin it, set SDI_OVERRIDE.
-A sanity line prints the chosen series + latest value so you can eyeball it against
-the report (e.g. June 5 2026 should read 5,323 AF).
+In that table the two right-most columns (header "C.A.P.  DIVER. / ACCUM.") are:
+    DIVER. A.F.   = that day's CAP diversion        -> headline (display_value)
+    DIVER. ACCUM. = running month-to-date total     -> month-to-date cell
+A 7-day average of the daily column gives the trend, same as Mead/Havasu.
 
-Stdlib only (urllib, json, datetime, argparse). No third-party deps.
+Because the daily report is fixed-width text, parsing is by whitespace tokens,
+anchored on the last two numeric tokens of each day row (robust to the mid-row
+gaps the report sometimes has, e.g. a missing Davis gen cell). Stdlib only.
 """
 
 import argparse
 import json
+import re
 import sys
 import urllib.request
 from datetime import datetime
 
 # ----------------------------------------------------------------------------- config
-FEED_URL = "https://www.usbr.gov/lc/region/g4000/riverops/webreports/accumweb.json"
-SOURCE_PAGE = "https://www.usbr.gov/lc/region/g4000/hourly/levels.html"
-SOURCE_NAME = "U.S. Bureau of Reclamation \u2014 Lower Colorado River Operations"
+REPORT_URL = "https://www.usbr.gov/lc/region/g4000/hourly/levels.html"
+SOURCE_NAME = "U.S. Bureau of Reclamation \u2014 Lower Colorado River Daily Report"
 INDICATOR_KEY = "cap_diversion"
 DEFAULT_STATUS_FILE = "docs/snowpack-status.json"
 
-# Auto-discovery: a series matches if ANY phrase appears (case-insensitive) in its
-# SiteName OR DataTypeName. The CAP intake report line is the target; the MWD
-# "diversion at intake" line is explicitly excluded so we don't grab the wrong one.
-MATCH_PHRASES = ["central arizona", "c.a.p", "cap diversion", "mark wilmer", "arizona project"]
-EXCLUDE_PHRASES = ["metropolitan", "mwd"]
-
-# Set to a specific SDI string (e.g. "2099") to skip auto-discovery and pin the series.
-SDI_OVERRIDE = "3413"
-
-# Trend logic, mirroring the Mead/Havasu indicators (7-day trailing window).
 TREND_WINDOW_DAYS = 7
 TREND_BAND_AF = 150          # within +/- this many AF/day of the 7-day avg => "steady"
-
 ENSURE_ASCII = False         # match whatever your other update_*.py scripts use
 # -----------------------------------------------------------------------------
 
 
-def fetch_feed(url=FEED_URL, timeout=30):
+def fetch_report(url=REPORT_URL, timeout=30):
     req = urllib.request.Request(url, headers={"User-Agent": "waterlinewest-bot/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+        return resp.read().decode("utf-8", errors="replace")
 
 
-def list_series(feed):
-    """Return [(sdi, sitename, datatypename, unit), ...] for diagnostics."""
-    out = []
-    for s in feed.get("Series", []):
-        out.append((s.get("SDI", ""), s.get("SiteName", ""),
-                    s.get("DataTypeName", ""), s.get("DataTypeUnit", "")))
-    return out
+def parse_accumulations(html_text):
+    """Parse the ACCUMULATIONS table -> [(date, cap_daily_af, cap_accum_af), ...] asc."""
+    text = re.sub(r"<[^>]+>", "", html_text)  # drop any HTML tags, keep the <pre> text
 
+    m = re.search(r"ACCUMULATIONS\s+FOR\s+([A-Za-z]+)\s+(\d{4})", text)
+    if not m:
+        raise ValueError("Could not find 'ACCUMULATIONS FOR <MONTH> <YEAR>' in the report.")
+    month = datetime.strptime(m.group(1).title(), "%B").month
+    year = int(m.group(2))
 
-def _matches(site, dtype):
-    hay = (site + " " + dtype).lower()
-    if any(x in hay for x in EXCLUDE_PHRASES):
-        return False
-    return any(p in hay for p in MATCH_PHRASES)
+    # Scope strictly to this table: from the header to its TOTAL line. The later
+    # tables (reservoir elevations, CRSP, losses) also have day-numbered rows but
+    # with different right-most columns, so we must not read past TOTAL.
+    tail = text[m.end():]
+    cut = tail.find("TOTAL")
+    block = tail[:cut] if cut != -1 else tail
 
-
-def select_series(feed, sdi_override=SDI_OVERRIDE):
-    """Pick the CAP series. Returns (series_dict, how_selected). Raises on ambiguity."""
-    series = feed.get("Series", [])
-    if sdi_override:
-        for s in series:
-            if str(s.get("SDI", "")) == str(sdi_override):
-                return s, f"SDI override {sdi_override}"
-        raise ValueError(f"SDI_OVERRIDE={sdi_override} not found in feed.")
-    hits = [s for s in series if _matches(s.get("SiteName", ""), s.get("DataTypeName", ""))]
-    if len(hits) == 1:
-        return hits[0], "keyword auto-match"
-    if not hits:
-        raise ValueError("No CAP series matched. Inspect the printed list and set SDI_OVERRIDE.")
-    names = ", ".join(f'{h.get("SDI")}:{h.get("SiteName")}/{h.get("DataTypeName")}' for h in hits)
-    raise ValueError(f"Ambiguous match ({len(hits)} series): {names}. Set SDI_OVERRIDE to one SDI.")
-
-
-def clean_points(series):
-    """[(date, float)] sorted ascending, skipping empty/non-numeric 'v'."""
-    pts = []
-    for d in series.get("Data", []):
-        raw = (d.get("v") or "").strip().replace(",", "")
-        if raw == "":
+    rows = []
+    for line in block.splitlines():
+        toks = line.split()
+        if len(toks) < 3 or not toks[0].isdigit():
+            continue
+        day = int(toks[0])
+        if not (1 <= day <= 31):
             continue
         try:
-            val = float(raw)
+            daily = float(toks[-2].replace(",", ""))
+            accum = float(toks[-1].replace(",", ""))
+            dt = datetime(year, month, day)
         except ValueError:
             continue
-        try:
-            dt = datetime.strptime(d["t"], "%m/%d/%Y %I:%M:%S %p")
-        except (KeyError, ValueError):
-            continue
-        pts.append((dt, val))
-    pts.sort(key=lambda p: p[0])
-    return pts
+        rows.append((dt, daily, accum))
+
+    rows.sort(key=lambda r: r[0])
+    return rows
 
 
-def compute_fields(points):
-    """Derive latest, month-to-date, and 7-day trend from cleaned points."""
-    if not points:
-        raise ValueError("CAP series had no usable (non-empty) data points.")
-    latest_dt, latest_val = points[-1]
+def compute_fields(rows):
+    if not rows:
+        raise ValueError("No CAP rows parsed from the daily report (table layout changed?).")
+    latest_dt, latest_val, accum = rows[-1]
 
-    # Month-to-date: sum of this calendar month's dailies up to and incl. latest.
-    mtd = sum(v for (dt, v) in points
-              if dt.year == latest_dt.year and dt.month == latest_dt.month and dt <= latest_dt)
-
-    # 7-day trailing window = the N days strictly before the latest reading.
-    prior = [v for (dt, v) in points if dt < latest_dt][-TREND_WINDOW_DAYS:]
+    prior = [d for (dt, d, a) in rows if dt < latest_dt][-TREND_WINDOW_DAYS:]
     if prior:
         avg7 = sum(prior) / len(prior)
         delta = latest_val - avg7
@@ -134,22 +99,16 @@ def compute_fields(points):
             trend = "falling"
         else:
             trend = "steady"
-        window_start = [dt for (dt, v) in points if dt < latest_dt][-len(prior)]
-        window_end = max(dt for (dt, v) in points if dt < latest_dt)
+        earlier = [dt for (dt, d, a) in rows if dt < latest_dt]
+        window_start, window_end = earlier[-len(prior)], earlier[-1]
     else:
         avg7, delta, trend = latest_val, 0.0, "steady"
         window_start = window_end = latest_dt
 
     return {
-        "latest_dt": latest_dt,
-        "latest_val": latest_val,
-        "mtd": mtd,
-        "avg7": avg7,
-        "delta": delta,
-        "trend": trend,
-        "window_start": window_start,
-        "window_end": window_end,
-        "n_window": len(prior),
+        "latest_dt": latest_dt, "latest_val": latest_val, "mtd": accum,
+        "avg7": avg7, "delta": delta, "trend": trend,
+        "window_start": window_start, "window_end": window_end, "n_window": len(prior),
     }
 
 
@@ -161,29 +120,25 @@ def _trend_note(f):
     d = f["delta"]
     if f["trend"] == "steady":
         return f"{_af(abs(d))} AF near {TREND_WINDOW_DAYS}-day avg"
-    direction = "above" if d > 0 else "below"
-    return f"{_af(abs(d))} AF {direction} {TREND_WINDOW_DAYS}-day avg"
+    return f"{_af(abs(d))} AF {'above' if d > 0 else 'below'} {TREND_WINDOW_DAYS}-day avg"
 
 
-def build_indicator(series, f):
+def build_indicator(f):
     return {
         "label": "CAP Diversion at Lake Havasu",
         "display_value": _af(f["latest_val"]),
         "note": "AF/day diverted at Mark Wilmer Pumping Plant",
         "timestamp": "Observed " + f["latest_dt"].strftime("%Y-%m-%d"),
         "source_name": SOURCE_NAME,
-        "source_url": SOURCE_PAGE,
-        "api_url": FEED_URL,
+        "source_url": REPORT_URL,
+        "api_url": REPORT_URL,
         "update_cadence": "Daily",
         "provisional": True,
-        "usbr_sdi": str(series.get("SDI", "")),
-        "usbr_site_name": series.get("SiteName", ""),
+        "extraction": "parsed from LC Daily Report ACCUMULATIONS table (C.A.P. columns)",
         "usbr_observed_date": f["latest_dt"].strftime("%Y-%m-%d"),
-        # month-to-date (also feeds the 6A "Month to Date" cell once it's hooked)
         "month_to_date": round(f["mtd"]),
         "month_to_date_display": _af(f["mtd"]),
         "month_to_date_note": "acre-feet, " + f["latest_dt"].strftime("%B") + " to date",
-        # trend cluster, parallel to mead_elevation / havasu_elevation
         "trend_band_af": TREND_BAND_AF,
         "avg_7day": round(f["avg7"], 1),
         "avg_7day_display": _af(f["avg7"]),
@@ -199,51 +154,34 @@ def build_indicator(series, f):
 def write_status(status_file, indicator):
     with open(status_file, "r", encoding="utf-8") as fh:
         status = json.load(fh)
-
     status.setdefault("indicators", {})[INDICATOR_KEY] = indicator
-
     now_disp = datetime.now().strftime("%B %-d, %Y, %-I:%M %p Arizona time")
     auto = status.setdefault("automation", {})
     auto["script_cap"] = "scripts/update_cap_diversion.py"
-    auto["cap_source"] = "USBR Lower Colorado River Daily Report (accumweb.json)"
+    auto["cap_source"] = "USBR LC Daily Report (levels.html ACCUMULATIONS table)"
     auto["cap_last_run_display"] = now_disp
-
     with open(status_file, "w", encoding="utf-8") as fh:
         json.dump(status, fh, indent=2, ensure_ascii=ENSURE_ASCII)
         fh.write("\n")
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Publish cap_diversion into snowpack-status.json")
+    ap = argparse.ArgumentParser(description="Publish cap_diversion from the LC Daily Report")
     ap.add_argument("--status-file", default=DEFAULT_STATUS_FILE)
-    ap.add_argument("--sdi", default=SDI_OVERRIDE, help="Pin a specific series SDI (skips auto-match)")
-    ap.add_argument("--dry-run", action="store_true", help="Print the block; do not write the file")
+    ap.add_argument("--dry-run", action="store_true", help="Print the block; do not write")
     args = ap.parse_args()
 
-    feed = fetch_feed()
+    rows = parse_accumulations(fetch_report())
 
-    # Always print the full series inventory -- this is how you SEE the CAP series.
-    print("Series in feed (SDI | SiteName | DataTypeName | Unit):", file=sys.stderr)
-    for sdi, site, dtype, unit in list_series(feed):
-        print(f"  {sdi:>6} | {site} | {dtype} | {unit}", file=sys.stderr)
+    print(f"Parsed {len(rows)} CAP day-rows from the report. Last 7:", file=sys.stderr)
+    for dt, d, a in rows[-7:]:
+        print(f"  {dt:%Y-%m-%d}  daily={_af(d)} AF  accum={_af(a)} AF", file=sys.stderr)
 
-    series, how = select_series(feed, sdi_override=args.sdi)
+    f = compute_fields(rows)
+    indicator = build_indicator(f)
 
-    _raw = series.get("Data", [])
-    print(f"\nSDI {series.get('SDI')} raw points: {len(_raw)}. Last 12 (date -> value):", file=sys.stderr)
-    for _d in _raw[-12:]:
-        print(f"  {_d.get('t')!r} -> {_d.get('v')!r}", file=sys.stderr)
-
-    pts = clean_points(series)
-    f = compute_fields(pts)
-
-    print(f"\nSelected CAP series via {how}:", file=sys.stderr)
-    print(f"  SDI {series.get('SDI')} | {series.get('SiteName')} | {series.get('DataTypeName')}",
-          file=sys.stderr)
-    print(f"  latest {f['latest_dt']:%Y-%m-%d} = {_af(f['latest_val'])} AF/day "
+    print(f"\nLatest {f['latest_dt']:%Y-%m-%d} = {_af(f['latest_val'])} AF/day "
           f"| MTD {_af(f['mtd'])} AF | trend {f['trend']}", file=sys.stderr)
-
-    indicator = build_indicator(series, f)
 
     if args.dry_run:
         print("\n--dry-run, would write this block:\n", file=sys.stderr)
