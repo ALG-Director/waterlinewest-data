@@ -47,6 +47,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No JSON changes to commit."
           else
-            git commit -m "Update Lees Ferry, Lake Powell, tributary, Mead, snowpack basins, and history data"
+            git commit -m "Update Lees Ferry, Lake Powell, tributary, Mead, snowpack basins, CAP, and history data"
             git push
           fi
