@@ -44,7 +44,7 @@ MATCH_PHRASES = ["central arizona", "c.a.p", "cap diversion", "mark wilmer", "ar
 EXCLUDE_PHRASES = ["metropolitan", "mwd"]
 
 # Set to a specific SDI string (e.g. "2099") to skip auto-discovery and pin the series.
-SDI_OVERRIDE = None
+SDI_OVERRIDE = "3413"
 
 # Trend logic, mirroring the Mead/Havasu indicators (7-day trailing window).
 TREND_WINDOW_DAYS = 7
