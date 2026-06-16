@@ -228,6 +228,12 @@ def main():
         print(f"  {sdi:>6} | {site} | {dtype} | {unit}", file=sys.stderr)
 
     series, how = select_series(feed, sdi_override=args.sdi)
+
+    _raw = series.get("Data", [])
+    print(f"\nSDI {series.get('SDI')} raw points: {len(_raw)}. Last 12 (date -> value):", file=sys.stderr)
+    for _d in _raw[-12:]:
+        print(f"  {_d.get('t')!r} -> {_d.get('v')!r}", file=sys.stderr)
+
     pts = clean_points(series)
     f = compute_fields(pts)
 
