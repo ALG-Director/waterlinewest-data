@@ -2,7 +2,7 @@
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
   "as_of": "2026-06-15",
-  "generated_at_display": "June 16, 2026, 11:09 AM Arizona time",
+  "generated_at_display": "June 16, 2026, 1:38 PM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -15,8 +15,8 @@
     "display_value": "2%",
     "note": "of median",
     "band": "far-below",
-    "current_swe_in": 0.8,
-    "median_swe_in": 35.5,
+    "current_swe_in": 0.7,
+    "median_swe_in": 32.4,
     "sites": 116
   },
   "basins": [
@@ -940,17 +940,17 @@
     {
       "name": "San Juan",
       "huc4": "1408",
-      "index_pct": 2,
+      "index_pct": 0,
       "band": "far-below",
-      "current_swe_in": 0.1,
-      "median_swe_in": 5.0,
+      "current_swe_in": 0.0,
+      "median_swe_in": 1.9,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 136,
-        "q75": 491,
-        "max": 3120
+        "median": 166,
+        "q75": 895,
+        "max": 7647
       },
       "status": null,
       "stations": [
@@ -959,8 +959,8 @@
           "name": "Stump Lakes",
           "elev": 11230.0,
           "cur": 0.0,
-          "median": 3.1,
-          "pct": 0
+          "median": 0.0,
+          "pct": null
         },
         {
           "triplet": "713:CO:SNTL",
@@ -990,7 +990,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -3645,7 +3645,7 @@
       },
       {
         "d": "2026-04-02",
-        "v": 4.19
+        "v": 4.2
       },
       {
         "d": "2026-04-03",
@@ -3913,15 +3913,15 @@
       },
       {
         "d": "2026-06-08",
-        "v": 0.03
-      },
-      {
-        "d": "2026-06-09",
         "v": 0.02
       },
       {
-        "d": "2026-06-10",
+        "d": "2026-06-09",
         "v": 0.01
+      },
+      {
+        "d": "2026-06-10",
+        "v": 0.0
       },
       {
         "d": "2026-06-11",
@@ -3933,11 +3933,11 @@
       },
       {
         "d": "2026-06-13",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-06-14",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-06-15",
