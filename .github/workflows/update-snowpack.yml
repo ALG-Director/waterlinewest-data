@@ -38,6 +38,7 @@ jobs:
         run: python scripts/update_history_append.py
       - name: Update CAP diversion
         run: python scripts/update_cap_diversion.py
+        continue-on-error: true
       - name: Commit updated JSON if it changed
         run: |
           git config user.name "github-actions[bot]"
