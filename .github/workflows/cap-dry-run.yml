@@ -1,0 +1,17 @@
+name: CAP Diversion - Dry Run (no commit)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cap-dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: CAP diversion dry run (prints series list, writes nothing)
+        run: python scripts/update_cap_diversion.py --dry-run
