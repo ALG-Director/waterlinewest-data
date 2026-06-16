@@ -263,7 +263,19 @@
       "ft_vs_avg": 0.33,
       "trend": "steady",
       "trend_note": "0.33 ft near 7-day avg"
-    }
+    },
+    "cap_diversion": {
+  "label": "CAP Diversion at Lake Havasu",
+  "display_value": "5,323",
+  "note": "AF/day diverted at Mark Wilmer Pumping Plant",
+  "timestamp": "Observed 2026-06-05",
+  "source_name": "U.S. Bureau of Reclamation \u2014 Lower Colorado River Operations",
+  "source_url": "https://www.usbr.gov/lc/riverops.html",
+  "update_cadence": "Daily",
+  "provisional": true,
+  "trend": "steady",
+  "trend_note": "Manual entry until the update script computes a 7-day average"
+}
   },
   "source_line": "Sources: NRCS/CAP snowpack reporting · NOAA CBRFC · U.S. Bureau of Reclamation · USGS Water Data. Lees Ferry flow, tributary inflow, and Lake Powell elevation update automatically from USGS and Reclamation; snowpack and forecast values remain curated. Provisional values may be revised.",
   "automation": {
