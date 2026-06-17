@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-06-15",
-  "generated_at_display": "June 16, 2026, 1:38 PM Arizona time",
+  "as_of": "2026-06-16",
+  "generated_at_display": "June 17, 2026, 9:44 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,12 +11,12 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 2,
-    "display_value": "2%",
+    "index_pct": 5,
+    "display_value": "5%",
     "note": "of median",
     "band": "far-below",
-    "current_swe_in": 0.7,
-    "median_swe_in": 32.4,
+    "current_swe_in": 1.3,
+    "median_swe_in": 26.6,
     "sites": 116
   },
   "basins": [
@@ -25,15 +25,15 @@
       "huc4": "1401",
       "index_pct": 5,
       "band": "far-below",
-      "current_swe_in": 0.5,
-      "median_swe_in": 10.4,
+      "current_swe_in": 0.4,
+      "median_swe_in": 8.0,
       "sites_reporting": 27,
       "distribution_pct": {
         "min": 0,
-        "q25": 8,
-        "median": 135,
-        "q75": 330,
-        "max": 1925
+        "q25": 7,
+        "median": 136,
+        "q75": 380,
+        "max": 2210
       },
       "status": null,
       "stations": [
@@ -42,7 +42,7 @@
           "name": "Fremont Pass",
           "elev": 11310.0,
           "cur": 0.0,
-          "median": 3.1,
+          "median": 2.2,
           "pct": 0
         },
         {
@@ -66,16 +66,16 @@
           "name": "Arapaho Ridge",
           "elev": 10960.0,
           "cur": 0.0,
-          "median": 0.5,
+          "median": 0.1,
           "pct": 0
         },
         {
           "triplet": "345:CO:SNTL",
           "name": "Bison Lake",
           "elev": 10950.0,
-          "cur": 0.1,
-          "median": 6.8,
-          "pct": 1
+          "cur": 0.0,
+          "median": 5.7,
+          "pct": 0
         },
         {
           "triplet": "565:CO:SNTL",
@@ -113,7 +113,7 @@
           "triplet": "547:CO:SNTL",
           "name": "Ivanhoe",
           "elev": 10540.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -217,7 +217,7 @@
           "triplet": "1014:CO:SNTL",
           "name": "Middle Fork Camp",
           "elev": 8960.0,
-          "cur": 0.1,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -260,7 +260,7 @@
       "huc4": "1402",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.0,
       "median_swe_in": 0.0,
       "sites_reporting": 10,
       "distribution_pct": null,
@@ -302,7 +302,7 @@
           "triplet": "682:CO:SNTL",
           "name": "Park Reservoir",
           "elev": 9990.0,
-          "cur": 0.2,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -412,17 +412,17 @@
     {
       "name": "Upper Green",
       "huc4": "1404",
-      "index_pct": 0,
-      "band": "far-below",
-      "current_swe_in": 0.0,
-      "median_swe_in": 2.3,
+      "index_pct": 50,
+      "band": "below",
+      "current_swe_in": 0.4,
+      "median_swe_in": 0.8,
       "sites_reporting": 19,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 126,
-        "q75": 1068,
-        "max": 6074
+        "median": 294,
+        "q75": 2534,
+        "max": 16825
       },
       "status": null,
       "stations": [
@@ -502,7 +502,7 @@
           "triplet": "779:WY:SNTL",
           "name": "Spring Creek Divide",
           "elev": 9020.0,
-          "cur": 0.0,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -510,7 +510,7 @@
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -519,7 +519,7 @@
           "name": "Blind Bull Sum",
           "elev": 8880.0,
           "cur": 0.0,
-          "median": 2.3,
+          "median": 0.8,
           "pct": 0
         },
         {
@@ -558,7 +558,7 @@
           "triplet": "765:WY:SNTL",
           "name": "Snider Basin",
           "elev": 8080.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -586,14 +586,14 @@
       "index_pct": 0,
       "band": "far-below",
       "current_swe_in": 0.0,
-      "median_swe_in": 17.8,
+      "median_swe_in": 16.3,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
-        "q25": 12,
+        "q25": 9,
         "median": 100,
-        "q75": 223,
-        "max": 807
+        "q75": 229,
+        "max": 820
       },
       "status": null,
       "stations": [
@@ -602,7 +602,7 @@
           "name": "Tower",
           "elev": 10610.0,
           "cur": 0.0,
-          "median": 17.8,
+          "median": 16.3,
           "pct": 0
         },
         {
@@ -724,7 +724,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.0,
+      "current_swe_in": 0.2,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -734,7 +734,7 @@
           "triplet": "481:UT:SNTL",
           "name": "Five Points Lake",
           "elev": 10920.0,
-          "cur": 0.0,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -940,17 +940,17 @@
     {
       "name": "San Juan",
       "huc4": "1408",
-      "index_pct": 0,
+      "index_pct": 20,
       "band": "far-below",
-      "current_swe_in": 0.0,
-      "median_swe_in": 1.9,
+      "current_swe_in": 0.3,
+      "median_swe_in": 1.5,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 166,
-        "q75": 895,
-        "max": 7647
+        "median": 163,
+        "q75": 1062,
+        "max": 9240
       },
       "status": null,
       "stations": [
@@ -975,7 +975,7 @@
           "name": "Wolf Creek Summit",
           "elev": 10930.0,
           "cur": 0.0,
-          "median": 1.9,
+          "median": 1.5,
           "pct": 0
         },
         {
@@ -990,7 +990,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.0,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -1022,7 +1022,7 @@
           "triplet": "840:CO:SNTL",
           "name": "Upper San Juan",
           "elev": 10140.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -3941,6 +3941,10 @@
       },
       {
         "d": "2026-06-15",
+        "v": 0.0
+      },
+      {
+        "d": "2026-06-16",
         "v": 0.01
       }
     ]
