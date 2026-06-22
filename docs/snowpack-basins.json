@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-06-20",
-  "generated_at_display": "June 21, 2026, 8:16 AM Arizona time",
+  "as_of": "2026-06-21",
+  "generated_at_display": "June 22, 2026, 10:48 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,29 +11,29 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 16,
-    "display_value": "16%",
+    "index_pct": 11,
+    "display_value": "11%",
     "note": "of median",
     "band": "far-below",
-    "current_swe_in": 1.7,
-    "median_swe_in": 10.9,
+    "current_swe_in": 0.9,
+    "median_swe_in": 8.3,
     "sites": 116
   },
   "basins": [
     {
       "name": "Colorado Headwaters",
       "huc4": "1401",
-      "index_pct": 25,
-      "band": "far-below",
-      "current_swe_in": 0.3,
-      "median_swe_in": 1.2,
+      "index_pct": 133,
+      "band": "above",
+      "current_swe_in": 0.4,
+      "median_swe_in": 0.3,
       "sites_reporting": 27,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 125,
-        "q75": 1579,
-        "max": 9917
+        "median": 183,
+        "q75": 5475,
+        "max": 35500
       },
       "status": null,
       "stations": [
@@ -42,8 +42,8 @@
           "name": "Fremont Pass",
           "elev": 11310.0,
           "cur": 0.0,
-          "median": 0.3,
-          "pct": 0
+          "median": 0.0,
+          "pct": null
         },
         {
           "triplet": "335:CO:SNTL",
@@ -74,8 +74,8 @@
           "name": "Bison Lake",
           "elev": 10950.0,
           "cur": 0.1,
-          "median": 0.9,
-          "pct": 11
+          "median": 0.3,
+          "pct": 29
         },
         {
           "triplet": "565:CO:SNTL",
@@ -217,7 +217,7 @@
           "triplet": "1014:CO:SNTL",
           "name": "Middle Fork Camp",
           "elev": 8960.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -414,7 +414,7 @@
       "huc4": "1404",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.3,
+      "current_swe_in": 0.1,
       "median_swe_in": 0.0,
       "sites_reporting": 19,
       "distribution_pct": null,
@@ -504,7 +504,7 @@
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -552,7 +552,7 @@
           "triplet": "765:WY:SNTL",
           "name": "Snider Basin",
           "elev": 8080.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -580,14 +580,14 @@
       "index_pct": 0,
       "band": "far-below",
       "current_swe_in": 0.0,
-      "median_swe_in": 9.7,
+      "median_swe_in": 8.0,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
         "median": 100,
-        "q75": 275,
-        "max": 1132
+        "q75": 317,
+        "max": 1265
       },
       "status": null,
       "stations": [
@@ -596,7 +596,7 @@
           "name": "Tower",
           "elev": 10610.0,
           "cur": 0.0,
-          "median": 9.7,
+          "median": 8.0,
           "pct": 0
         },
         {
@@ -718,7 +718,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.8,
+      "current_swe_in": 0.0,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -728,7 +728,7 @@
           "triplet": "481:UT:SNTL",
           "name": "Five Points Lake",
           "elev": 10920.0,
-          "cur": 0.2,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -848,7 +848,7 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.3,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -872,7 +872,7 @@
           "triplet": "432:UT:SNTL",
           "name": "Currant Creek",
           "elev": 7920.0,
-          "cur": 0.3,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -936,7 +936,7 @@
       "huc4": "1408",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.1,
+      "current_swe_in": 0.2,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -978,7 +978,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.1,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -3945,11 +3945,15 @@
       },
       {
         "d": "2026-06-19",
-        "v": 0.02
+        "v": 0.01
       },
       {
         "d": "2026-06-20",
-        "v": 0.02
+        "v": 0.01
+      },
+      {
+        "d": "2026-06-21",
+        "v": 0.01
       }
     ]
   }
