@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-06-21",
-  "generated_at_display": "June 22, 2026, 10:48 AM Arizona time",
+  "as_of": "2026-06-22",
+  "generated_at_display": "June 23, 2026, 9:06 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,31 +11,25 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 11,
-    "display_value": "11%",
+    "index_pct": 14,
+    "display_value": "14%",
     "note": "of median",
     "band": "far-below",
-    "current_swe_in": 0.9,
-    "median_swe_in": 8.3,
+    "current_swe_in": 0.8,
+    "median_swe_in": 5.8,
     "sites": 116
   },
   "basins": [
     {
       "name": "Colorado Headwaters",
       "huc4": "1401",
-      "index_pct": 133,
-      "band": "above",
+      "index_pct": null,
+      "band": "none",
       "current_swe_in": 0.4,
-      "median_swe_in": 0.3,
+      "median_swe_in": 0.0,
       "sites_reporting": 27,
-      "distribution_pct": {
-        "min": 0,
-        "q25": 0,
-        "median": 183,
-        "q75": 5475,
-        "max": 35500
-      },
-      "status": null,
+      "distribution_pct": null,
+      "status": "normally snow-free by this date",
       "stations": [
         {
           "triplet": "485:CO:SNTL",
@@ -74,8 +68,8 @@
           "name": "Bison Lake",
           "elev": 10950.0,
           "cur": 0.1,
-          "median": 0.3,
-          "pct": 29
+          "median": 0.0,
+          "pct": null
         },
         {
           "triplet": "565:CO:SNTL",
@@ -260,7 +254,7 @@
       "huc4": "1402",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.1,
       "median_swe_in": 0.0,
       "sites_reporting": 10,
       "distribution_pct": null,
@@ -302,7 +296,7 @@
           "triplet": "682:CO:SNTL",
           "name": "Park Reservoir",
           "elev": 9990.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -504,7 +498,7 @@
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -568,7 +562,7 @@
           "triplet": "555:WY:SNTL",
           "name": "Kendall R.S.",
           "elev": 7790.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         }
@@ -580,14 +574,14 @@
       "index_pct": 0,
       "band": "far-below",
       "current_swe_in": 0.0,
-      "median_swe_in": 8.0,
+      "median_swe_in": 5.8,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
         "median": 100,
-        "q75": 317,
-        "max": 1265
+        "q75": 403,
+        "max": 1534
       },
       "status": null,
       "stations": [
@@ -596,7 +590,7 @@
           "name": "Tower",
           "elev": 10610.0,
           "cur": 0.0,
-          "median": 8.0,
+          "median": 5.8,
           "pct": 0
         },
         {
@@ -718,7 +712,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.0,
+      "current_swe_in": 0.1,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -728,7 +722,7 @@
           "triplet": "481:UT:SNTL",
           "name": "Five Points Lake",
           "elev": 10920.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -936,7 +930,7 @@
       "huc4": "1408",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.1,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -978,7 +972,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -3953,6 +3947,10 @@
       },
       {
         "d": "2026-06-21",
+        "v": 0.01
+      },
+      {
+        "d": "2026-06-22",
         "v": 0.01
       }
     ]
