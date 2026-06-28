@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-06-25",
-  "generated_at_display": "June 26, 2026, 8:32 AM Arizona time",
+  "as_of": "2026-06-27",
+  "generated_at_display": "June 28, 2026, 7:56 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,12 +11,12 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 1050,
-    "display_value": "1050%",
+    "index_pct": null,
+    "display_value": "—",
     "note": "of median",
-    "band": "far-above",
-    "current_swe_in": 2.1,
-    "median_swe_in": 0.2,
+    "band": "none",
+    "current_swe_in": 2.4,
+    "median_swe_in": 0.0,
     "sites": 116
   },
   "basins": [
@@ -25,7 +25,7 @@
       "huc4": "1401",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.6,
+      "current_swe_in": 0.4,
       "median_swe_in": 0.0,
       "sites_reporting": 27,
       "distribution_pct": null,
@@ -107,7 +107,7 @@
           "triplet": "547:CO:SNTL",
           "name": "Ivanhoe",
           "elev": 10540.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -163,7 +163,7 @@
           "triplet": "869:CO:SNTL",
           "name": "Willow Creek Pass",
           "elev": 9520.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -195,7 +195,7 @@
           "triplet": "669:CO:SNTL",
           "name": "North Lost Trail",
           "elev": 9190.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -211,7 +211,7 @@
           "triplet": "1014:CO:SNTL",
           "name": "Middle Fork Camp",
           "elev": 8960.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -408,7 +408,7 @@
       "huc4": "1404",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.3,
       "median_swe_in": 0.0,
       "sites_reporting": 19,
       "distribution_pct": null,
@@ -498,7 +498,7 @@
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -571,27 +571,21 @@
     {
       "name": "Yampa / White",
       "huc4": "1405",
-      "index_pct": 250,
-      "band": "far-above",
-      "current_swe_in": 0.5,
-      "median_swe_in": 0.2,
+      "index_pct": null,
+      "band": "none",
+      "current_swe_in": 0.4,
+      "median_swe_in": 0.0,
       "sites_reporting": 15,
-      "distribution_pct": {
-        "min": 0,
-        "q25": 0,
-        "median": 125,
-        "q75": 8250,
-        "max": 32450
-      },
-      "status": null,
+      "distribution_pct": null,
+      "status": "normally snow-free by this date",
       "stations": [
         {
           "triplet": "825:CO:SNTL",
           "name": "Tower",
           "elev": 10610.0,
           "cur": 0.0,
-          "median": 0.2,
-          "pct": 0
+          "median": 0.0,
+          "pct": null
         },
         {
           "triplet": "717:CO:SNTL",
@@ -629,7 +623,7 @@
           "triplet": "378:CO:SNTL",
           "name": "Burro Mountain",
           "elev": 9290.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -712,7 +706,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.6,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -722,7 +716,7 @@
           "triplet": "481:UT:SNTL",
           "name": "Five Points Lake",
           "elev": 10920.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -842,7 +836,7 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.0,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -930,7 +924,7 @@
       "huc4": "1408",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.4,
+      "current_swe_in": 0.5,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -1020,7 +1014,7 @@
           "triplet": "905:CO:SNTL",
           "name": "Mancos",
           "elev": 10020.0,
-          "cur": 0.1,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -3963,6 +3957,14 @@
       },
       {
         "d": "2026-06-25",
+        "v": 0.02
+      },
+      {
+        "d": "2026-06-26",
+        "v": 0.02
+      },
+      {
+        "d": "2026-06-27",
         "v": 0.02
       }
     ]
