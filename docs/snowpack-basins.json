@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-07-12",
-  "generated_at_display": "July 13, 2026, 8:50 AM Arizona time",
+  "as_of": "2026-07-13",
+  "generated_at_display": "July 14, 2026, 8:02 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -15,7 +15,7 @@
     "display_value": "—",
     "note": "of median",
     "band": "none",
-    "current_swe_in": 1.9,
+    "current_swe_in": 2.2,
     "median_swe_in": 0.0,
     "sites": 116
   },
@@ -408,7 +408,7 @@
       "huc4": "1404",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.0,
+      "current_swe_in": 0.2,
       "median_swe_in": 0.0,
       "sites_reporting": 19,
       "distribution_pct": null,
@@ -498,7 +498,7 @@
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -546,7 +546,7 @@
           "triplet": "765:WY:SNTL",
           "name": "Snider Basin",
           "elev": 8080.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -706,7 +706,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.5,
+      "current_swe_in": 0.6,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -716,7 +716,7 @@
           "triplet": "481:UT:SNTL",
           "name": "Five Points Lake",
           "elev": 10920.0,
-          "cur": 0.0,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -860,7 +860,7 @@
           "triplet": "432:UT:SNTL",
           "name": "Currant Creek",
           "elev": 7920.0,
-          "cur": 0.2,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -4017,14 +4017,18 @@
       },
       {
         "d": "2026-07-10",
-        "v": 0.02
+        "v": 0.01
       },
       {
         "d": "2026-07-11",
-        "v": 0.02
+        "v": 0.01
       },
       {
         "d": "2026-07-12",
+        "v": 0.01
+      },
+      {
+        "d": "2026-07-13",
         "v": 0.02
       }
     ]
