@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-07-20",
-  "generated_at_display": "July 21, 2026, 8:17 AM Arizona time",
+  "as_of": "2026-07-21",
+  "generated_at_display": "July 22, 2026, 8:15 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -15,7 +15,7 @@
     "display_value": "—",
     "note": "of median",
     "band": "none",
-    "current_swe_in": 2.5,
+    "current_swe_in": 2.4,
     "median_swe_in": 0.0,
     "sites": 116
   },
@@ -25,7 +25,7 @@
       "huc4": "1401",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.5,
+      "current_swe_in": 0.6,
       "median_swe_in": 0.0,
       "sites_reporting": 27,
       "distribution_pct": null,
@@ -59,7 +59,7 @@
           "triplet": "1030:CO:SNTL",
           "name": "Arapaho Ridge",
           "elev": 10960.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -254,7 +254,7 @@
       "huc4": "1402",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.1,
       "median_swe_in": 0.0,
       "sites_reporting": 10,
       "distribution_pct": null,
@@ -296,7 +296,7 @@
           "triplet": "682:CO:SNTL",
           "name": "Park Reservoir",
           "elev": 9990.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -490,7 +490,7 @@
           "triplet": "779:WY:SNTL",
           "name": "Spring Creek Divide",
           "elev": 9020.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -498,7 +498,7 @@
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -573,7 +573,7 @@
       "huc4": "1405",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.0,
+      "current_swe_in": 0.1,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -647,7 +647,7 @@
           "triplet": "859:WY:SNTL",
           "name": "Whiskey Park",
           "elev": 8950.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -706,7 +706,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.5,
+      "current_swe_in": 0.7,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -716,7 +716,7 @@
           "triplet": "481:UT:SNTL",
           "name": "Five Points Lake",
           "elev": 10920.0,
-          "cur": 0.0,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -748,7 +748,7 @@
           "triplet": "566:UT:SNTL",
           "name": "Lakefork #1",
           "elev": 10120.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -860,7 +860,7 @@
           "triplet": "432:UT:SNTL",
           "name": "Currant Creek",
           "elev": 7920.0,
-          "cur": 0.2,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -924,7 +924,7 @@
       "huc4": "1408",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.9,
+      "current_swe_in": 0.5,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -942,7 +942,7 @@
           "triplet": "713:CO:SNTL",
           "name": "Red Mountain Pass",
           "elev": 11060.0,
-          "cur": 0.2,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -966,7 +966,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.4,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -998,7 +998,7 @@
           "triplet": "840:CO:SNTL",
           "name": "Upper San Juan",
           "elev": 10140.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -4009,7 +4009,7 @@
       },
       {
         "d": "2026-07-08",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-07-09",
@@ -4017,23 +4017,23 @@
       },
       {
         "d": "2026-07-10",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-07-11",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-07-12",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-07-13",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-07-14",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-07-15",
@@ -4041,7 +4041,7 @@
       },
       {
         "d": "2026-07-16",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-07-17",
@@ -4057,6 +4057,10 @@
       },
       {
         "d": "2026-07-20",
+        "v": 0.01
+      },
+      {
+        "d": "2026-07-21",
         "v": 0.02
       }
     ]
