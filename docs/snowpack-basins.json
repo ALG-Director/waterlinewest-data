@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-08-06",
-  "generated_at_display": "August 7, 2026, 7:18 AM Arizona time",
+  "as_of": "2026-08-07",
+  "generated_at_display": "August 8, 2026, 6:55 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -15,7 +15,7 @@
     "display_value": "—",
     "note": "of median",
     "band": "none",
-    "current_swe_in": 2.1,
+    "current_swe_in": 2.4,
     "median_swe_in": 0.0,
     "sites": 116
   },
@@ -706,7 +706,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.6,
+      "current_swe_in": 0.8,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -756,7 +756,7 @@
           "triplet": "742:UT:SNTL",
           "name": "Seeley Creek",
           "elev": 9900.0,
-          "cur": 0.0,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -924,7 +924,7 @@
       "huc4": "1408",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.9,
+      "current_swe_in": 1.0,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -966,7 +966,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.2,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -4125,6 +4125,10 @@
       },
       {
         "d": "2026-08-06",
+        "v": 0.01
+      },
+      {
+        "d": "2026-08-07",
         "v": 0.02
       }
     ]
