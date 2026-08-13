@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-08-10",
-  "generated_at_display": "August 11, 2026, 7:30 AM Arizona time",
+  "as_of": "2026-08-12",
+  "generated_at_display": "August 13, 2026, 7:33 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -15,7 +15,7 @@
     "display_value": "—",
     "note": "of median",
     "band": "none",
-    "current_swe_in": 2.4,
+    "current_swe_in": 3.7,
     "median_swe_in": 0.0,
     "sites": 117
   },
@@ -25,7 +25,7 @@
       "huc4": "1401",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.6,
+      "current_swe_in": 0.9,
       "median_swe_in": 0.0,
       "sites_reporting": 27,
       "distribution_pct": null,
@@ -83,7 +83,7 @@
           "triplet": "737:CO:SNTL",
           "name": "Schofield Pass",
           "elev": 10640.0,
-          "cur": 0.1,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -107,7 +107,7 @@
           "triplet": "547:CO:SNTL",
           "name": "Ivanhoe",
           "elev": 10540.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -131,7 +131,7 @@
           "triplet": "842:CO:SNTL",
           "name": "Vail Mountain",
           "elev": 10290.0,
-          "cur": 0.1,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -139,7 +139,7 @@
           "triplet": "622:CO:SNTL",
           "name": "Mesa Lakes",
           "elev": 10160.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -171,7 +171,7 @@
           "triplet": "1040:CO:SNTL",
           "name": "Mccoy Park",
           "elev": 9500.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -254,7 +254,7 @@
       "huc4": "1402",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.4,
       "median_swe_in": 0.0,
       "sites_reporting": 10,
       "distribution_pct": null,
@@ -304,7 +304,7 @@
           "triplet": "675:CO:SNTL",
           "name": "Overland Res.",
           "elev": 9890.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -320,7 +320,7 @@
           "triplet": "680:CO:SNTL",
           "name": "Park Cone",
           "elev": 9600.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -347,7 +347,7 @@
       "huc4": "1403",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.1,
+      "current_swe_in": 0.2,
       "median_swe_in": 0.0,
       "sites_reporting": 6,
       "distribution_pct": null,
@@ -397,7 +397,7 @@
           "triplet": "739:CO:SNTL",
           "name": "Scotch Creek",
           "elev": 9160.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         }
@@ -408,7 +408,7 @@
       "huc4": "1404",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.0,
+      "current_swe_in": 0.2,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -530,7 +530,7 @@
           "triplet": "661:WY:SNTL",
           "name": "New Fork Lake",
           "elev": 8380.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -570,7 +570,7 @@
           "triplet": "555:WY:SNTL",
           "name": "Kendall R.S.",
           "elev": 7790.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         }
@@ -581,7 +581,7 @@
       "huc4": "1405",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.1,
+      "current_swe_in": 0.3,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -671,7 +671,7 @@
           "triplet": "467:CO:SNTL",
           "name": "Elk River",
           "elev": 8710.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -679,7 +679,7 @@
           "triplet": "449:WY:SNTL",
           "name": "Divide Peak",
           "elev": 8700.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -714,7 +714,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.6,
+      "current_swe_in": 0.7,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -764,7 +764,7 @@
           "triplet": "742:UT:SNTL",
           "name": "Seeley Creek",
           "elev": 9900.0,
-          "cur": 0.0,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -804,7 +804,7 @@
           "triplet": "714:UT:SNTL",
           "name": "Red Pine Ridge",
           "elev": 8990.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -844,7 +844,7 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.4,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -860,7 +860,7 @@
           "triplet": "435:UT:SNTL",
           "name": "Daniels-Strawberry",
           "elev": 8010.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -932,7 +932,7 @@
       "huc4": "1408",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.8,
+      "current_swe_in": 1.0,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -974,7 +974,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -990,7 +990,7 @@
           "triplet": "780:CO:SNTL",
           "name": "Spud Mountain",
           "elev": 10660.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -998,7 +998,7 @@
           "triplet": "632:CO:SNTL",
           "name": "Molas Lake",
           "elev": 10610.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -1014,7 +1014,7 @@
           "triplet": "629:CO:SNTL",
           "name": "Mineral Creek",
           "elev": 10030.0,
-          "cur": 0.4,
+          "cur": 0.5,
           "median": 0.0,
           "pct": null
         },
@@ -4150,6 +4150,14 @@
       {
         "d": "2026-08-10",
         "v": 0.02
+      },
+      {
+        "d": "2026-08-11",
+        "v": 0.02
+      },
+      {
+        "d": "2026-08-12",
+        "v": 0.03
       }
     ]
   }
