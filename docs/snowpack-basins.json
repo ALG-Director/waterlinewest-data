@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-08-23",
-  "generated_at_display": "August 24, 2026, 7:00 AM Arizona time",
+  "as_of": "2026-08-24",
+  "generated_at_display": "August 25, 2026, 7:00 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -15,7 +15,7 @@
     "display_value": "—",
     "note": "of median",
     "band": "none",
-    "current_swe_in": 5.2,
+    "current_swe_in": 5.9,
     "median_swe_in": 0.0,
     "sites": 117
   },
@@ -25,7 +25,7 @@
       "huc4": "1401",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.5,
+      "current_swe_in": 0.8,
       "median_swe_in": 0.0,
       "sites_reporting": 27,
       "distribution_pct": null,
@@ -67,7 +67,7 @@
           "triplet": "345:CO:SNTL",
           "name": "Bison Lake",
           "elev": 10950.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -75,7 +75,7 @@
           "triplet": "565:CO:SNTL",
           "name": "Lake Irene",
           "elev": 10680.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -83,7 +83,7 @@
           "triplet": "737:CO:SNTL",
           "name": "Schofield Pass",
           "elev": 10640.0,
-          "cur": 0.1,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -131,7 +131,7 @@
           "triplet": "842:CO:SNTL",
           "name": "Vail Mountain",
           "elev": 10290.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -211,7 +211,7 @@
           "triplet": "1014:CO:SNTL",
           "name": "Middle Fork Camp",
           "elev": 8960.0,
-          "cur": 0.1,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -254,7 +254,7 @@
       "huc4": "1402",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.7,
+      "current_swe_in": 0.6,
       "median_swe_in": 0.0,
       "sites_reporting": 10,
       "distribution_pct": null,
@@ -328,7 +328,7 @@
           "triplet": "409:CO:SNTL",
           "name": "Columbine Pass",
           "elev": 9160.0,
-          "cur": 0.5,
+          "cur": 0.4,
           "median": 0.0,
           "pct": null
         },
@@ -408,7 +408,7 @@
       "huc4": "1404",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.9,
+      "current_swe_in": 0.7,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -442,7 +442,7 @@
           "triplet": "468:WY:SNTL",
           "name": "Elkhart Park G.S.",
           "elev": 9410.0,
-          "cur": 0.7,
+          "cur": 0.6,
           "median": 0.0,
           "pct": null
         },
@@ -554,7 +554,7 @@
           "triplet": "765:WY:SNTL",
           "name": "Snider Basin",
           "elev": 8080.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -714,7 +714,7 @@
       "huc4": "1406",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.5,
+      "current_swe_in": 1.0,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -764,7 +764,7 @@
           "triplet": "742:UT:SNTL",
           "name": "Seeley Creek",
           "elev": 9900.0,
-          "cur": 0.0,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -844,7 +844,7 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.3,
+          "cur": 0.4,
           "median": 0.0,
           "pct": null
         },
@@ -860,7 +860,7 @@
           "triplet": "435:UT:SNTL",
           "name": "Daniels-Strawberry",
           "elev": 8010.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -932,7 +932,7 @@
       "huc4": "1408",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.9,
+      "current_swe_in": 1.1,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -974,7 +974,7 @@
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -1006,7 +1006,7 @@
           "triplet": "840:CO:SNTL",
           "name": "Upper San Juan",
           "elev": 10140.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -4133,27 +4133,27 @@
       },
       {
         "d": "2026-08-06",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-07",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-08",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-09",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-10",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-11",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-12",
@@ -4161,7 +4161,7 @@
       },
       {
         "d": "2026-08-13",
-        "v": 0.02
+        "v": 0.0
       },
       {
         "d": "2026-08-14",
@@ -4169,15 +4169,15 @@
       },
       {
         "d": "2026-08-15",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-16",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-17",
-        "v": 0.01
+        "v": 0.0
       },
       {
         "d": "2026-08-18",
@@ -4185,22 +4185,26 @@
       },
       {
         "d": "2026-08-19",
-        "v": 0.02
+        "v": 0.01
       },
       {
         "d": "2026-08-20",
-        "v": 0.02
+        "v": 0.0
       },
       {
         "d": "2026-08-21",
-        "v": 0.03
+        "v": 0.01
       },
       {
         "d": "2026-08-22",
-        "v": 0.05
+        "v": 0.02
       },
       {
         "d": "2026-08-23",
+        "v": 0.02
+      },
+      {
+        "d": "2026-08-24",
         "v": 0.05
       }
     ]
