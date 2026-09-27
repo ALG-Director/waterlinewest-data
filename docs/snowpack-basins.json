@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-09-25",
-  "generated_at_display": "September 26, 2026, 10:08 AM Arizona time",
+  "as_of": "2026-09-26",
+  "generated_at_display": "September 27, 2026, 10:46 AM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -15,7 +15,7 @@
     "display_value": "—",
     "note": "of median",
     "band": "none",
-    "current_swe_in": 8.3,
+    "current_swe_in": 7.4,
     "median_swe_in": 0.0,
     "sites": 118
   },
@@ -25,7 +25,7 @@
       "huc4": "1401",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 3.1,
+      "current_swe_in": 2.6,
       "median_swe_in": 0.0,
       "sites_reporting": 27,
       "distribution_pct": null,
@@ -43,7 +43,7 @@
           "triplet": "335:CO:SNTL",
           "name": "Berthoud Summit",
           "elev": 11300.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -75,7 +75,7 @@
           "triplet": "565:CO:SNTL",
           "name": "Lake Irene",
           "elev": 10680.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -131,7 +131,7 @@
           "triplet": "842:CO:SNTL",
           "name": "Vail Mountain",
           "elev": 10290.0,
-          "cur": 0.3,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -139,7 +139,7 @@
           "triplet": "622:CO:SNTL",
           "name": "Mesa Lakes",
           "elev": 10160.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -155,7 +155,7 @@
           "triplet": "556:CO:SNTL",
           "name": "Kiln",
           "elev": 9610.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -254,7 +254,7 @@
       "huc4": "1402",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 2.1,
+      "current_swe_in": 1.9,
       "median_swe_in": 0.0,
       "sites_reporting": 11,
       "distribution_pct": null,
@@ -272,7 +272,7 @@
           "triplet": "1188:CO:SNTL",
           "name": "Wager Gulch",
           "elev": 11110.0,
-          "cur": 0.4,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -280,7 +280,7 @@
           "triplet": "701:CO:SNTL",
           "name": "Porphyry Creek",
           "elev": 10790.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -355,7 +355,7 @@
       "huc4": "1403",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.1,
+      "current_swe_in": 0.0,
       "median_swe_in": 0.0,
       "sites_reporting": 6,
       "distribution_pct": null,
@@ -365,7 +365,7 @@
           "triplet": "1060:CO:SNTL",
           "name": "Sharkstooth",
           "elev": 10730.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -416,7 +416,7 @@
       "huc4": "1404",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.2,
+      "current_swe_in": 0.3,
       "median_swe_in": 0.0,
       "sites_reporting": 20,
       "distribution_pct": null,
@@ -514,7 +514,7 @@
           "triplet": "1162:UT:SNTL",
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -589,7 +589,7 @@
       "huc4": "1405",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 1.0,
+      "current_swe_in": 0.8,
       "median_swe_in": 0.0,
       "sites_reporting": 15,
       "distribution_pct": null,
@@ -623,7 +623,7 @@
           "triplet": "709:CO:SNTL",
           "name": "Rabbit Ears",
           "elev": 9390.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -639,7 +639,7 @@
           "triplet": "378:CO:SNTL",
           "name": "Burro Mountain",
           "elev": 9290.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -772,7 +772,7 @@
           "triplet": "742:UT:SNTL",
           "name": "Seeley Creek",
           "elev": 9900.0,
-          "cur": 0.3,
+          "cur": 0.4,
           "median": 0.0,
           "pct": null
         },
@@ -852,7 +852,7 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.4,
+          "cur": 0.3,
           "median": 0.0,
           "pct": null
         },
@@ -4341,6 +4341,10 @@
       },
       {
         "d": "2026-09-25",
+        "v": 0.07
+      },
+      {
+        "d": "2026-09-26",
         "v": 0.07
       }
     ]
