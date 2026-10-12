@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-10-10",
-  "generated_at_display": "October 11, 2026, 11:03 AM Arizona time",
+  "as_of": "2026-10-11",
+  "generated_at_display": "October 12, 2026, 2:44 PM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,29 +11,29 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 364,
-    "display_value": "364%",
+    "index_pct": 233,
+    "display_value": "233%",
     "note": "of median",
     "band": "far-above",
-    "current_swe_in": 10.2,
-    "median_swe_in": 2.8,
+    "current_swe_in": 9.3,
+    "median_swe_in": 4.0,
     "sites": 114
   },
   "basins": [
     {
       "name": "Colorado Headwaters",
       "huc4": "1401",
-      "index_pct": 350,
+      "index_pct": 200,
       "band": "far-above",
-      "current_swe_in": 2.8,
-      "median_swe_in": 0.8,
+      "current_swe_in": 2.6,
+      "median_swe_in": 1.3,
       "sites_reporting": 27,
       "distribution_pct": {
         "min": 0,
-        "q25": 44,
-        "median": 333,
-        "q75": 1200,
-        "max": 2917
+        "q25": 23,
+        "median": 318,
+        "q75": 999,
+        "max": 2362
       },
       "status": null,
       "stations": [
@@ -49,7 +49,7 @@
           "triplet": "335:CO:SNTL",
           "name": "Berthoud Summit",
           "elev": 11300.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -65,25 +65,25 @@
           "triplet": "1030:CO:SNTL",
           "name": "Arapaho Ridge",
           "elev": 10960.0,
-          "cur": 0.1,
-          "median": 0.2,
-          "pct": 50
+          "cur": 0.0,
+          "median": 0.3,
+          "pct": 0
         },
         {
           "triplet": "345:CO:SNTL",
           "name": "Bison Lake",
           "elev": 10950.0,
-          "cur": 0.1,
-          "median": 0.1,
-          "pct": 100
+          "cur": 0.3,
+          "median": 0.2,
+          "pct": 150
         },
         {
           "triplet": "565:CO:SNTL",
           "name": "Lake Irene",
           "elev": 10680.0,
           "cur": 0.0,
-          "median": 0.0,
-          "pct": null
+          "median": 0.2,
+          "pct": 0
         },
         {
           "triplet": "737:CO:SNTL",
@@ -106,7 +106,7 @@
           "name": "Elliot Ridge",
           "elev": 10550.0,
           "cur": 0.0,
-          "median": 0.1,
+          "median": 0.2,
           "pct": 0
         },
         {
@@ -193,7 +193,7 @@
           "triplet": "913:CO:SNTL",
           "name": "Buffalo Park",
           "elev": 9240.0,
-          "cur": 0.3,
+          "cur": 0.2,
           "median": 0.0,
           "pct": null
         },
@@ -217,7 +217,7 @@
           "triplet": "1014:CO:SNTL",
           "name": "Middle Fork Camp",
           "elev": 8960.0,
-          "cur": 0.2,
+          "cur": 0.1,
           "median": 0.0,
           "pct": null
         },
@@ -265,10 +265,10 @@
       "sites_reporting": 10,
       "distribution_pct": {
         "min": 0,
-        "q25": 0,
+        "q25": 17,
         "median": 267,
-        "q75": 500,
-        "max": 2900
+        "q75": 750,
+        "max": 4233
       },
       "status": null,
       "stations": [
@@ -418,17 +418,17 @@
     {
       "name": "Upper Green",
       "huc4": "1404",
-      "index_pct": 300,
-      "band": "far-above",
-      "current_swe_in": 1.2,
-      "median_swe_in": 0.4,
+      "index_pct": 100,
+      "band": "near",
+      "current_swe_in": 0.9,
+      "median_swe_in": 0.9,
       "sites_reporting": 17,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 475,
-        "q75": 900,
-        "max": 3975
+        "median": 333,
+        "q75": 472,
+        "max": 2144
       },
       "status": null,
       "stations": [
@@ -445,7 +445,7 @@
           "name": "Steel Creek Park",
           "elev": 10140.0,
           "cur": 0.0,
-          "median": 0.1,
+          "median": 0.2,
           "pct": 0
         },
         {
@@ -492,25 +492,25 @@
           "triplet": "342:WY:SNTL",
           "name": "Big Sandy Opening",
           "elev": 9100.0,
-          "cur": 0.1,
-          "median": 0.1,
-          "pct": 100
+          "cur": 0.0,
+          "median": 0.2,
+          "pct": 0
         },
         {
           "triplet": "779:WY:SNTL",
           "name": "Spring Creek Divide",
           "elev": 9020.0,
-          "cur": 0.3,
-          "median": 0.0,
-          "pct": null
+          "cur": 0.2,
+          "median": 0.2,
+          "pct": 100
         },
         {
           "triplet": "353:WY:SNTL",
           "name": "Blind Bull Sum",
           "elev": 8880.0,
           "cur": 0.0,
-          "median": 0.0,
-          "pct": null
+          "median": 0.1,
+          "pct": 0
         },
         {
           "triplet": "831:WY:SNTL",
@@ -548,7 +548,7 @@
           "triplet": "765:WY:SNTL",
           "name": "Snider Basin",
           "elev": 8080.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -573,17 +573,17 @@
     {
       "name": "Yampa / White",
       "huc4": "1405",
-      "index_pct": 243,
+      "index_pct": 178,
       "band": "far-above",
-      "current_swe_in": 1.7,
-      "median_swe_in": 0.7,
+      "current_swe_in": 1.6,
+      "median_swe_in": 0.9,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 143,
-        "q75": 714,
-        "max": 1371
+        "median": 200,
+        "q75": 606,
+        "max": 2000
       },
       "status": null,
       "stations": [
@@ -592,7 +592,7 @@
           "name": "Tower",
           "elev": 10610.0,
           "cur": 0.0,
-          "median": 0.7,
+          "median": 0.9,
           "pct": 0
         },
         {
@@ -607,7 +607,7 @@
           "triplet": "827:CO:SNTL",
           "name": "Trapper Lake",
           "elev": 9750.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -712,17 +712,17 @@
     {
       "name": "Lower Green / Duchesne",
       "huc4": "1406",
-      "index_pct": 480,
+      "index_pct": 460,
       "band": "far-above",
-      "current_swe_in": 2.4,
+      "current_swe_in": 2.3,
       "median_swe_in": 0.5,
       "sites_reporting": 20,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 200,
-        "q75": 920,
-        "max": 5000
+        "median": 120,
+        "q75": 940,
+        "max": 4680
       },
       "status": null,
       "stations": [
@@ -818,7 +818,7 @@
           "triplet": "559:UT:SNTL",
           "name": "Kings Cabin",
           "elev": 8740.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -893,7 +893,7 @@
       "huc4": "1407",
       "index_pct": null,
       "band": "none",
-      "current_swe_in": 0.1,
+      "current_swe_in": 0.0,
       "median_swe_in": 0.0,
       "sites_reporting": 4,
       "distribution_pct": null,
@@ -911,7 +911,7 @@
           "triplet": "348:UT:SNTL",
           "name": "Black Flat-U.M. Ck",
           "elev": 9420.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -936,17 +936,17 @@
     {
       "name": "San Juan",
       "huc4": "1408",
-      "index_pct": 1000,
+      "index_pct": 900,
       "band": "far-above",
-      "current_swe_in": 1.0,
+      "current_swe_in": 0.9,
       "median_swe_in": 0.1,
       "sites_reporting": 15,
       "distribution_pct": {
         "min": 0,
         "q25": 0,
-        "median": 400,
-        "q75": 3250,
-        "max": 22200
+        "median": 200,
+        "q75": 3500,
+        "max": 26800
       },
       "status": null,
       "stations": [
@@ -954,7 +954,7 @@
           "triplet": "797:CO:SNTL",
           "name": "Stump Lakes",
           "elev": 11230.0,
-          "cur": 0.1,
+          "cur": 0.0,
           "median": 0.0,
           "pct": null
         },
@@ -2946,6 +2946,10 @@
       {
         "d": "2026-10-10",
         "v": 0.09
+      },
+      {
+        "d": "2026-10-11",
+        "v": 0.08
       }
     ]
   }
