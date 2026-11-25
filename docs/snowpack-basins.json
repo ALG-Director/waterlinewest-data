@@ -1,8 +1,8 @@
 {
   "module": "snowpack_basins",
   "title": "Upper Colorado Basin Snowpack",
-  "as_of": "2026-11-23",
-  "generated_at_display": "November 24, 2026, 4:01 PM Arizona time",
+  "as_of": "2026-11-24",
+  "generated_at_display": "November 25, 2026, 3:28 PM Arizona time",
   "normals_window": "1991-2020",
   "min_normal_years": 10,
   "method": "Basin index = sum(current SWE) / sum(per-station 1991-2020 median SWE) across reporting SNOTEL stations with at least 10 years of record in that window. Current values and history are pulled from the NRCS AWDB REST /data endpoint; medians are computed by WaterLineWest.",
@@ -11,28 +11,28 @@
   "provisional": true,
   "compiled": {
     "label": "Entire Upper Colorado",
-    "index_pct": 83,
-    "display_value": "83%",
+    "index_pct": 80,
+    "display_value": "80%",
     "note": "of median",
     "band": "near",
-    "current_swe_in": 245.3,
-    "median_swe_in": 294.1,
+    "current_swe_in": 243.4,
+    "median_swe_in": 305.0,
     "sites": 117
   },
   "basins": [
     {
       "name": "Colorado Headwaters",
       "huc4": "1401",
-      "index_pct": 52,
-      "band": "below",
-      "current_swe_in": 40.4,
-      "median_swe_in": 78.2,
+      "index_pct": 48,
+      "band": "far-below",
+      "current_swe_in": 38.7,
+      "median_swe_in": 81.3,
       "sites_reporting": 27,
       "distribution_pct": {
         "min": 26,
-        "q25": 82,
-        "median": 104,
-        "q75": 130,
+        "q25": 80,
+        "median": 102,
+        "q75": 132,
         "max": 162
       },
       "status": null,
@@ -49,9 +49,9 @@
           "triplet": "335:CO:SNTL",
           "name": "Berthoud Summit",
           "elev": 11300.0,
-          "cur": 0.8,
+          "cur": 0.7,
           "median": 3.2,
-          "pct": 25
+          "pct": 22
         },
         {
           "triplet": "505:CO:SNTL",
@@ -81,25 +81,25 @@
           "triplet": "565:CO:SNTL",
           "name": "Lake Irene",
           "elev": 10680.0,
-          "cur": 0.6,
-          "median": 4.2,
-          "pct": 14
+          "cur": 0.5,
+          "median": 4.6,
+          "pct": 11
         },
         {
           "triplet": "737:CO:SNTL",
           "name": "Schofield Pass",
           "elev": 10640.0,
-          "cur": 5.7,
-          "median": 5.9,
-          "pct": 97
+          "cur": 5.8,
+          "median": 6.2,
+          "pct": 94
         },
         {
           "triplet": "542:CO:SNTL",
           "name": "Independence Pass",
           "elev": 10570.0,
-          "cur": 3.3,
-          "median": 3.5,
-          "pct": 94
+          "cur": 3.2,
+          "median": 3.8,
+          "pct": 84
         },
         {
           "triplet": "1120:CO:SNTL",
@@ -113,25 +113,25 @@
           "triplet": "547:CO:SNTL",
           "name": "Ivanhoe",
           "elev": 10540.0,
-          "cur": 2.9,
-          "median": 3.0,
-          "pct": 97
+          "cur": 2.8,
+          "median": 3.1,
+          "pct": 90
         },
         {
           "triplet": "415:CO:SNTL",
           "name": "Copper Mountain",
           "elev": 10500.0,
           "cur": 0.5,
-          "median": 2.7,
-          "pct": 19
+          "median": 3.1,
+          "pct": 16
         },
         {
           "triplet": "970:CO:SNTL",
           "name": "Jones Pass",
           "elev": 10430.0,
-          "cur": 0.4,
+          "cur": 0.3,
           "median": 2.5,
-          "pct": 16
+          "pct": 12
         },
         {
           "triplet": "842:CO:SNTL",
@@ -146,40 +146,40 @@
           "name": "Mesa Lakes",
           "elev": 10160.0,
           "cur": 2.5,
-          "median": 2.4,
-          "pct": 104
+          "median": 2.7,
+          "pct": 93
         },
         {
           "triplet": "1101:CO:SNTL",
           "name": "Chapman Tunnel",
           "elev": 10090.0,
-          "cur": 2.2,
+          "cur": 2.0,
           "median": 2.8,
-          "pct": 79
+          "pct": 71
         },
         {
           "triplet": "556:CO:SNTL",
           "name": "Kiln",
           "elev": 9610.0,
           "cur": 2.2,
-          "median": 2.1,
-          "pct": 105
+          "median": 2.2,
+          "pct": 100
         },
         {
           "triplet": "869:CO:SNTL",
           "name": "Willow Creek Pass",
           "elev": 9520.0,
-          "cur": 1.5,
-          "median": 3.2,
-          "pct": 47
+          "cur": 1.4,
+          "median": 3.3,
+          "pct": 42
         },
         {
           "triplet": "1040:CO:SNTL",
           "name": "Mccoy Park",
           "elev": 9500.0,
-          "cur": 0.5,
-          "median": 2.0,
-          "pct": 25
+          "cur": 0.3,
+          "median": 2.2,
+          "pct": 13
         },
         {
           "triplet": "802:CO:SNTL",
@@ -193,17 +193,17 @@
           "triplet": "913:CO:SNTL",
           "name": "Buffalo Park",
           "elev": 9240.0,
-          "cur": 0.5,
-          "median": 2.8,
-          "pct": 18
+          "cur": 0.1,
+          "median": 3.0,
+          "pct": 3
         },
         {
           "triplet": "669:CO:SNTL",
           "name": "North Lost Trail",
           "elev": 9190.0,
-          "cur": 2.5,
-          "median": 2.4,
-          "pct": 104
+          "cur": 2.4,
+          "median": 2.5,
+          "pct": 96
         },
         {
           "triplet": "688:CO:SNTL",
@@ -217,9 +217,9 @@
           "triplet": "1014:CO:SNTL",
           "name": "Middle Fork Camp",
           "elev": 8960.0,
-          "cur": 0.5,
-          "median": 2.0,
-          "pct": 25
+          "cur": 0.1,
+          "median": 2.4,
+          "pct": 4
         },
         {
           "triplet": "607:CO:SNTL",
@@ -234,41 +234,41 @@
           "name": "Stillwater Creek",
           "elev": 8760.0,
           "cur": 0.0,
-          "median": 1.3,
+          "median": 1.4,
           "pct": 0
         },
         {
           "triplet": "658:CO:SNTL",
           "name": "Nast Lake",
           "elev": 8710.0,
-          "cur": 1.3,
+          "cur": 1.4,
           "median": 0.9,
-          "pct": 144
+          "pct": 156
         },
         {
           "triplet": "1041:CO:SNTL",
           "name": "Beaver Ck Village",
           "elev": 8530.0,
           "cur": 0.6,
-          "median": 1.5,
-          "pct": 40
+          "median": 1.6,
+          "pct": 38
         }
       ]
     },
     {
       "name": "Gunnison",
       "huc4": "1402",
-      "index_pct": 99,
+      "index_pct": 95,
       "band": "near",
-      "current_swe_in": 25.1,
-      "median_swe_in": 25.4,
+      "current_swe_in": 25.0,
+      "median_swe_in": 26.2,
       "sites_reporting": 10,
       "distribution_pct": {
         "min": 16,
-        "q25": 56,
-        "median": 109,
-        "q75": 123,
-        "max": 219
+        "q25": 57,
+        "median": 107,
+        "q75": 124,
+        "max": 212
       },
       "status": null,
       "stations": [
@@ -276,98 +276,98 @@
           "triplet": "762:CO:SNTL",
           "name": "Slumgullion",
           "elev": 11560.0,
-          "cur": 6.9,
+          "cur": 7.0,
           "median": 3.5,
-          "pct": 197
+          "pct": 200
         },
         {
           "triplet": "701:CO:SNTL",
           "name": "Porphyry Creek",
           "elev": 10790.0,
           "cur": 3.1,
-          "median": 3.0,
-          "pct": 103
+          "median": 3.1,
+          "pct": 100
         },
         {
           "triplet": "1141:CO:SNTL",
           "name": "Upper Taylor",
           "elev": 10710.0,
           "cur": 2.4,
-          "median": 2.2,
-          "pct": 109
+          "median": 2.4,
+          "pct": 100
         },
         {
           "triplet": "380:CO:SNTL",
           "name": "Butte",
           "elev": 10190.0,
-          "cur": 1.3,
-          "median": 2.2,
-          "pct": 59
+          "cur": 1.4,
+          "median": 2.3,
+          "pct": 61
         },
         {
           "triplet": "682:CO:SNTL",
           "name": "Park Reservoir",
           "elev": 9990.0,
-          "cur": 4.0,
-          "median": 4.8,
-          "pct": 83
+          "cur": 3.9,
+          "median": 5.0,
+          "pct": 78
         },
         {
           "triplet": "675:CO:SNTL",
           "name": "Overland Res.",
           "elev": 9890.0,
-          "cur": 0.5,
+          "cur": 0.4,
           "median": 1.9,
-          "pct": 26
+          "pct": 21
         },
         {
           "triplet": "538:CO:SNTL",
           "name": "Idarado",
           "elev": 9780.0,
           "cur": 2.1,
-          "median": 2.1,
-          "pct": 100
+          "median": 2.3,
+          "pct": 91
         },
         {
           "triplet": "680:CO:SNTL",
           "name": "Park Cone",
           "elev": 9600.0,
-          "cur": 1.7,
+          "cur": 1.6,
           "median": 1.8,
-          "pct": 94
+          "pct": 89
         },
         {
           "triplet": "409:CO:SNTL",
           "name": "Columbine Pass",
           "elev": 9160.0,
-          "cur": 1.9,
+          "cur": 1.8,
           "median": 1.8,
-          "pct": 106
+          "pct": 100
         },
         {
           "triplet": "618:CO:SNTL",
           "name": "Mc Clure Pass",
           "elev": 8760.0,
-          "cur": 1.2,
+          "cur": 1.3,
           "median": 2.1,
-          "pct": 57
+          "pct": 62
         }
       ]
     },
     {
       "name": "Upper Colorado-Dolores",
       "huc4": "1403",
-      "index_pct": 137,
+      "index_pct": 131,
       "band": "above",
-      "current_swe_in": 17.1,
-      "median_swe_in": 12.5,
+      "current_swe_in": 17.0,
+      "median_swe_in": 13.0,
       "sites_reporting": 6,
       "distribution_pct": {
-        "min": 18,
-        "q25": 56,
-        "median": 114,
-        "q75": 153,
-        "max": 276
+        "min": 17,
+        "q25": 55,
+        "median": 112,
+        "q75": 148,
+        "max": 261
       },
       "status": null,
       "stations": [
@@ -377,31 +377,31 @@
           "elev": 10730.0,
           "cur": 4.7,
           "median": 2.1,
-          "pct": 219
+          "pct": 224
         },
         {
           "triplet": "465:CO:SNTL",
           "name": "El Diente Peak",
           "elev": 10210.0,
           "cur": 2.5,
-          "median": 1.7,
-          "pct": 147
+          "median": 1.9,
+          "pct": 132
         },
         {
           "triplet": "586:CO:SNTL",
           "name": "Lizard Head Pass",
           "elev": 10190.0,
           "cur": 3.1,
-          "median": 2.7,
-          "pct": 115
+          "median": 2.8,
+          "pct": 111
         },
         {
           "triplet": "589:CO:SNTL",
           "name": "Lone Cone",
           "elev": 9730.0,
-          "cur": 2.9,
-          "median": 2.8,
-          "pct": 104
+          "cur": 2.8,
+          "median": 2.9,
+          "pct": 97
         },
         {
           "triplet": "572:UT:SNTL",
@@ -416,25 +416,25 @@
           "name": "Scotch Creek",
           "elev": 9160.0,
           "cur": 1.3,
-          "median": 1.4,
-          "pct": 93
+          "median": 1.5,
+          "pct": 87
         }
       ]
     },
     {
       "name": "Upper Green",
       "huc4": "1404",
-      "index_pct": 53,
+      "index_pct": 50,
       "band": "below",
-      "current_swe_in": 25.2,
-      "median_swe_in": 47.6,
+      "current_swe_in": 24.9,
+      "median_swe_in": 49.5,
       "sites_reporting": 20,
       "distribution_pct": {
-        "min": 20,
-        "q25": 88,
-        "median": 100,
-        "q75": 123,
-        "max": 177
+        "min": 23,
+        "q25": 87,
+        "median": 101,
+        "q75": 122,
+        "max": 172
       },
       "status": null,
       "stations": [
@@ -442,32 +442,32 @@
           "triplet": "1117:UT:SNTL",
           "name": "Spirit Lk",
           "elev": 10240.0,
-          "cur": 4.8,
+          "cur": 4.9,
           "median": 2.5,
-          "pct": 192
+          "pct": 196
         },
         {
           "triplet": "790:UT:SNTL",
           "name": "Steel Creek Park",
           "elev": 10140.0,
           "cur": 2.1,
-          "median": 3.1,
-          "pct": 68
+          "median": 3.3,
+          "pct": 64
         },
         {
           "triplet": "521:UT:SNTL",
           "name": "Hewinta",
           "elev": 9510.0,
           "cur": 0.9,
-          "median": 1.3,
-          "pct": 69
+          "median": 1.4,
+          "pct": 64
         },
         {
           "triplet": "468:WY:SNTL",
           "name": "Elkhart Park G.S.",
           "elev": 9410.0,
-          "cur": 2.2,
-          "median": 2.5,
+          "cur": 2.3,
+          "median": 2.6,
           "pct": 88
         },
         {
@@ -475,8 +475,8 @@
           "name": "Indian Creek",
           "elev": 9400.0,
           "cur": 1.6,
-          "median": 4.0,
-          "pct": 40
+          "median": 4.6,
+          "pct": 35
         },
         {
           "triplet": "1133:WY:SNTL",
@@ -490,9 +490,9 @@
           "triplet": "1163:UT:SNTL",
           "name": "EF Blacks Fork GS",
           "elev": 9360.0,
-          "cur": 0.5,
-          "median": 1.6,
-          "pct": 30
+          "cur": 0.6,
+          "median": 1.8,
+          "pct": 34
         },
         {
           "triplet": "528:UT:SNTL",
@@ -506,9 +506,9 @@
           "triplet": "522:UT:SNTL",
           "name": "Hickerson Park",
           "elev": 9120.0,
-          "cur": 0.4,
+          "cur": 0.3,
           "median": 1.3,
-          "pct": 31
+          "pct": 23
         },
         {
           "triplet": "342:WY:SNTL",
@@ -522,8 +522,8 @@
           "triplet": "779:WY:SNTL",
           "name": "Spring Creek Divide",
           "elev": 9020.0,
-          "cur": 1.5,
-          "median": 4.1,
+          "cur": 1.6,
+          "median": 4.3,
           "pct": 37
         },
         {
@@ -531,32 +531,32 @@
           "name": "Blacks Fork Jct",
           "elev": 8880.0,
           "cur": 0.7,
-          "median": 1.2,
-          "pct": 56
+          "median": 1.4,
+          "pct": 52
         },
         {
           "triplet": "353:WY:SNTL",
           "name": "Blind Bull Sum",
           "elev": 8880.0,
-          "cur": 1.2,
+          "cur": 1.1,
           "median": 4.3,
-          "pct": 28
+          "pct": 26
         },
         {
           "triplet": "831:WY:SNTL",
           "name": "Triple Peak",
           "elev": 8520.0,
-          "cur": 1.0,
+          "cur": 0.9,
           "median": 4.1,
-          "pct": 24
+          "pct": 22
         },
         {
           "triplet": "661:WY:SNTL",
           "name": "New Fork Lake",
           "elev": 8380.0,
-          "cur": 0.8,
-          "median": 1.9,
-          "pct": 42
+          "cur": 0.7,
+          "median": 2.0,
+          "pct": 35
         },
         {
           "triplet": "554:WY:SNTL",
@@ -570,50 +570,50 @@
           "triplet": "597:WY:SNTL",
           "name": "Loomis Park",
           "elev": 8240.0,
-          "cur": 1.1,
-          "median": 2.2,
-          "pct": 50
+          "cur": 1.0,
+          "median": 2.3,
+          "pct": 43
         },
         {
           "triplet": "765:WY:SNTL",
           "name": "Snider Basin",
           "elev": 8080.0,
-          "cur": 0.3,
+          "cur": 0.2,
           "median": 2.1,
-          "pct": 14
+          "pct": 10
         },
         {
           "triplet": "509:WY:SNTL",
           "name": "Hams Fork",
           "elev": 7860.0,
           "cur": 0.3,
-          "median": 1.4,
-          "pct": 21
+          "median": 1.3,
+          "pct": 23
         },
         {
           "triplet": "555:WY:SNTL",
           "name": "Kendall R.S.",
           "elev": 7790.0,
-          "cur": 0.8,
-          "median": 1.8,
-          "pct": 44
+          "cur": 0.7,
+          "median": 2.0,
+          "pct": 35
         }
       ]
     },
     {
       "name": "Yampa / White",
       "huc4": "1405",
-      "index_pct": 30,
+      "index_pct": 28,
       "band": "far-below",
-      "current_swe_in": 14.8,
-      "median_swe_in": 49.6,
+      "current_swe_in": 14.6,
+      "median_swe_in": 51.7,
       "sites_reporting": 15,
       "distribution_pct": {
-        "min": 32,
+        "min": 34,
         "q25": 82,
-        "median": 102,
+        "median": 103,
         "q75": 132,
-        "max": 200
+        "max": 192
       },
       "status": null,
       "stations": [
@@ -621,72 +621,72 @@
           "triplet": "825:CO:SNTL",
           "name": "Tower",
           "elev": 10610.0,
-          "cur": 1.8,
+          "cur": 1.7,
           "median": 8.6,
-          "pct": 21
+          "pct": 20
         },
         {
           "triplet": "717:CO:SNTL",
           "name": "Ripple Creek",
           "elev": 10340.0,
           "cur": 1.7,
-          "median": 4.9,
-          "pct": 35
+          "median": 5.2,
+          "pct": 33
         },
         {
           "triplet": "827:CO:SNTL",
           "name": "Trapper Lake",
           "elev": 9750.0,
           "cur": 1.3,
-          "median": 2.9,
-          "pct": 45
+          "median": 3.0,
+          "pct": 43
         },
         {
           "triplet": "709:CO:SNTL",
           "name": "Rabbit Ears",
           "elev": 9390.0,
           "cur": 0.7,
-          "median": 3.9,
-          "pct": 18
+          "median": 4.2,
+          "pct": 17
         },
         {
           "triplet": "940:CO:SNTL",
           "name": "Lost Dog",
           "elev": 9350.0,
-          "cur": 0.7,
-          "median": 3.0,
-          "pct": 24
+          "cur": 0.6,
+          "median": 3.2,
+          "pct": 19
         },
         {
           "triplet": "378:CO:SNTL",
           "name": "Burro Mountain",
           "elev": 9290.0,
           "cur": 1.7,
-          "median": 2.4,
-          "pct": 71
+          "median": 2.3,
+          "pct": 74
         },
         {
           "triplet": "1061:CO:SNTL",
           "name": "Bear River",
           "elev": 9100.0,
           "cur": 0.8,
-          "median": 2.1,
-          "pct": 38
+          "median": 2.4,
+          "pct": 34
         },
         {
           "triplet": "426:CO:SNTL",
           "name": "Crosho",
           "elev": 8960.0,
-          "cur": 0.3,
-          "median": 2.0,
-          "pct": 15
+          "cur": 0.2,
+          "median": 2.1,
+          "pct": 10
         },
         {
           "triplet": "859:WY:SNTL",
           "name": "Whiskey Park",
           "elev": 8950.0,
           "cur": 0.9,
-          "median": 4.2,
+          "median": 4.3,
           "pct": 21
         },
         {
@@ -709,50 +709,50 @@
           "triplet": "449:WY:SNTL",
           "name": "Divide Peak",
           "elev": 8700.0,
-          "cur": 1.6,
-          "median": 3.2,
-          "pct": 50
+          "cur": 1.7,
+          "median": 3.6,
+          "pct": 47
         },
         {
           "triplet": "457:CO:SNTL",
           "name": "Dry Lake",
           "elev": 8240.0,
-          "cur": 0.5,
-          "median": 3.5,
-          "pct": 14
+          "cur": 0.4,
+          "median": 3.7,
+          "pct": 11
         },
         {
           "triplet": "732:WY:SNTL",
           "name": "Sandstone RS",
           "elev": 8150.0,
-          "cur": 0.4,
-          "median": 1.3,
-          "pct": 31
+          "cur": 0.5,
+          "median": 1.4,
+          "pct": 36
         },
         {
           "triplet": "317:WY:SNTL",
           "name": "Battle Mountain",
           "elev": 7460.0,
           "cur": 0.6,
-          "median": 1.4,
-          "pct": 43
+          "median": 1.5,
+          "pct": 40
         }
       ]
     },
     {
       "name": "Lower Green / Duchesne",
       "huc4": "1406",
-      "index_pct": 154,
-      "band": "far-above",
-      "current_swe_in": 56.2,
-      "median_swe_in": 36.4,
+      "index_pct": 149,
+      "band": "above",
+      "current_swe_in": 56.0,
+      "median_swe_in": 37.5,
       "sites_reporting": 20,
       "distribution_pct": {
         "min": 18,
         "q25": 64,
-        "median": 101,
+        "median": 104,
         "q75": 143,
-        "max": 285
+        "max": 276
       },
       "status": null,
       "stations": [
@@ -769,8 +769,8 @@
           "name": "Lakefork Basin",
           "elev": 10890.0,
           "cur": 4.1,
-          "median": 3.6,
-          "pct": 114
+          "median": 3.7,
+          "pct": 111
         },
         {
           "triplet": "368:UT:SNTL",
@@ -800,17 +800,17 @@
           "triplet": "742:UT:SNTL",
           "name": "Seeley Creek",
           "elev": 9900.0,
-          "cur": 3.7,
-          "median": 1.8,
-          "pct": 206
+          "cur": 3.6,
+          "median": 1.7,
+          "pct": 212
         },
         {
           "triplet": "643:UT:SNTL",
           "name": "Mosby Mtn.",
           "elev": 9550.0,
-          "cur": 3.4,
+          "cur": 3.5,
           "median": 2.2,
-          "pct": 155
+          "pct": 159
         },
         {
           "triplet": "833:UT:SNTL",
@@ -840,33 +840,33 @@
           "triplet": "714:UT:SNTL",
           "name": "Red Pine Ridge",
           "elev": 8990.0,
-          "cur": 1.7,
-          "median": 1.4,
-          "pct": 121
+          "cur": 1.5,
+          "median": 1.6,
+          "pct": 94
         },
         {
           "triplet": "559:UT:SNTL",
           "name": "Kings Cabin",
           "elev": 8740.0,
-          "cur": 2.0,
-          "median": 1.5,
-          "pct": 133
+          "cur": 1.9,
+          "median": 1.6,
+          "pct": 119
         },
         {
           "triplet": "1097:UT:SNTL",
           "name": "Timberline",
           "elev": 8720.0,
-          "cur": 2.9,
+          "cur": 3.0,
           "median": 0.6,
-          "pct": 483
+          "pct": 500
         },
         {
           "triplet": "864:UT:SNTL",
           "name": "White River #1",
           "elev": 8620.0,
           "cur": 0.9,
-          "median": 1.3,
-          "pct": 69
+          "median": 1.5,
+          "pct": 60
         },
         {
           "triplet": "1116:UT:SNTL",
@@ -880,25 +880,25 @@
           "triplet": "461:UT:SNTL",
           "name": "East Willow Creek",
           "elev": 8300.0,
-          "cur": 0.5,
+          "cur": 0.6,
           "median": 1.0,
-          "pct": 50
+          "pct": 60
         },
         {
           "triplet": "795:UT:SNTL",
           "name": "Strawberry Divide",
           "elev": 8100.0,
           "cur": 1.2,
-          "median": 1.5,
-          "pct": 80
+          "median": 1.9,
+          "pct": 63
         },
         {
           "triplet": "435:UT:SNTL",
           "name": "Daniels-Strawberry",
           "elev": 8010.0,
-          "cur": 1.7,
-          "median": 1.5,
-          "pct": 113
+          "cur": 1.6,
+          "median": 1.6,
+          "pct": 100
         },
         {
           "triplet": "432:UT:SNTL",
@@ -913,25 +913,25 @@
           "name": "Rock Creek",
           "elev": 7880.0,
           "cur": 1.2,
-          "median": 0.7,
-          "pct": 171
+          "median": 0.8,
+          "pct": 150
         }
       ]
     },
     {
       "name": "Dirty Devil / Escalante",
       "huc4": "1407",
-      "index_pct": 138,
+      "index_pct": 135,
       "band": "above",
-      "current_swe_in": 6.5,
-      "median_swe_in": 4.7,
+      "current_swe_in": 6.6,
+      "median_swe_in": 4.9,
       "sites_reporting": 4,
       "distribution_pct": {
         "min": 0,
-        "q25": 49,
-        "median": 111,
-        "q75": 172,
-        "max": 290
+        "q25": 61,
+        "median": 106,
+        "q75": 169,
+        "max": 285
       },
       "status": null,
       "stations": [
@@ -939,9 +939,9 @@
           "triplet": "452:UT:SNTL",
           "name": "Donkey Reservoir",
           "elev": 9800.0,
-          "cur": 1.3,
+          "cur": 1.4,
           "median": 1.2,
-          "pct": 108
+          "pct": 117
         },
         {
           "triplet": "348:UT:SNTL",
@@ -956,33 +956,33 @@
           "name": "Dills Camp",
           "elev": 9240.0,
           "cur": 1.9,
-          "median": 1.5,
-          "pct": 127
+          "median": 1.6,
+          "pct": 119
         },
         {
           "triplet": "1149:UT:SNTL",
           "name": "Fish Lake Utah",
           "elev": 8780.0,
           "cur": 1.3,
-          "median": 0.8,
-          "pct": 153
+          "median": 0.9,
+          "pct": 137
         }
       ]
     },
     {
       "name": "San Juan",
       "huc4": "1408",
-      "index_pct": 151,
-      "band": "far-above",
-      "current_swe_in": 60.0,
-      "median_swe_in": 39.7,
+      "index_pct": 148,
+      "band": "above",
+      "current_swe_in": 60.6,
+      "median_swe_in": 40.9,
       "sites_reporting": 15,
       "distribution_pct": {
-        "min": 14,
-        "q25": 51,
-        "median": 93,
-        "q75": 189,
-        "max": 268
+        "min": 13,
+        "q25": 52,
+        "median": 91,
+        "q75": 186,
+        "max": 260
       },
       "status": null,
       "stations": [
@@ -990,17 +990,17 @@
           "triplet": "797:CO:SNTL",
           "name": "Stump Lakes",
           "elev": 11230.0,
-          "cur": 6.0,
-          "median": 3.4,
-          "pct": 176
+          "cur": 6.1,
+          "median": 3.5,
+          "pct": 174
         },
         {
           "triplet": "713:CO:SNTL",
           "name": "Red Mountain Pass",
           "elev": 11060.0,
-          "cur": 9.0,
-          "median": 4.5,
-          "pct": 200
+          "cur": 8.9,
+          "median": 4.7,
+          "pct": 189
         },
         {
           "triplet": "874:CO:SNTL",
@@ -1014,17 +1014,17 @@
           "triplet": "904:CO:SNTL",
           "name": "Columbus Basin",
           "elev": 10780.0,
-          "cur": 5.4,
-          "median": 3.7,
-          "pct": 146
+          "cur": 5.5,
+          "median": 4.0,
+          "pct": 138
         },
         {
           "triplet": "843:CO:SNTL",
           "name": "Vallecito",
           "elev": 10740.0,
-          "cur": 2.5,
+          "cur": 2.6,
           "median": 1.8,
-          "pct": 139
+          "pct": 144
         },
         {
           "triplet": "1160:CO:SNTL",
@@ -1039,32 +1039,32 @@
           "name": "Spud Mountain",
           "elev": 10660.0,
           "cur": 5.2,
-          "median": 3.4,
-          "pct": 153
+          "median": 3.5,
+          "pct": 149
         },
         {
           "triplet": "632:CO:SNTL",
           "name": "Molas Lake",
           "elev": 10610.0,
           "cur": 4.6,
-          "median": 2.9,
-          "pct": 159
+          "median": 3.0,
+          "pct": 153
         },
         {
           "triplet": "840:CO:SNTL",
           "name": "Upper San Juan",
           "elev": 10140.0,
           "cur": 3.5,
-          "median": 3.1,
-          "pct": 113
+          "median": 3.4,
+          "pct": 103
         },
         {
           "triplet": "629:CO:SNTL",
           "name": "Mineral Creek",
           "elev": 10030.0,
           "cur": 3.4,
-          "median": 2.2,
-          "pct": 155
+          "median": 2.5,
+          "pct": 136
         },
         {
           "triplet": "905:CO:SNTL",
@@ -1072,39 +1072,39 @@
           "elev": 10020.0,
           "cur": 1.6,
           "median": 1.6,
-          "pct": 100
+          "pct": 97
         },
         {
           "triplet": "1143:AZ:SNTL",
           "name": "Beaver Spring",
           "elev": 9240.0,
-          "cur": 0.0,
+          "cur": 0.1,
           "median": 1.0,
-          "pct": 0
+          "pct": 10
         },
         {
           "triplet": "1138:NM:SNTL",
           "name": "Navajo Whiskey Ck",
           "elev": 9050.0,
-          "cur": 0.0,
-          "median": 0.6,
-          "pct": 0
+          "cur": 0.4,
+          "median": 0.4,
+          "pct": 100
         },
         {
           "triplet": "387:CO:SNTL",
           "name": "Cascade #2",
           "elev": 8990.0,
-          "cur": 1.1,
-          "median": 1.1,
-          "pct": 100
+          "cur": 1.0,
+          "median": 1.2,
+          "pct": 83
         },
         {
           "triplet": "383:UT:SNTL",
           "name": "Camp Jackson",
           "elev": 8840.0,
           "cur": 2.5,
-          "median": 1.3,
-          "pct": 192
+          "median": 1.2,
+          "pct": 208
         }
       ]
     }
@@ -3158,6 +3158,10 @@
       {
         "d": "2026-11-23",
         "v": 2.13
+      },
+      {
+        "d": "2026-11-24",
+        "v": 2.11
       }
     ]
   }
